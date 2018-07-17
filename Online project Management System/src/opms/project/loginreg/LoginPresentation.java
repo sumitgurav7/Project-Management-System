@@ -20,15 +20,25 @@ public class LoginPresentation {
 	public ModelAndView newRegistration(@RequestParam("fname") String fname,
 			              @RequestParam("email") String email, @RequestParam("phn") String phn,
 			              @RequestParam("type") String type, @RequestParam("department") String dept,
-			              @RequestParam("designation") String desig, @RequestParam("pnr") String pnr) {
+			              @RequestParam("designation") String desig, @RequestParam("pnr") String pnr,
+			              @RequestParam("password") String password) {
 		ModelAndView mv = new ModelAndView();
-		if(type.equalsIgnoreCase("faculty")) {
-			s.createNewFaculty(email,fname,dept,desig,phn);
-		} else if (type.equalsIgnoreCase("student")) {
-			s.createNewStudentLogin(pnr, fname, dept, phn, email);
-		} else if(type.equalsIgnoreCase("admin")) {
-			s.createNewAdmin(email, fname, phn);
-		}
+		boolean result = false;
+			result = s.createNewRegistration(fname, email, phn, type, dept, desig, pnr, password);
+			if(result) {
+				if(type.equalsIgnoreCase("faculty")) {
+					mv.setViewName("/faculty/faculty_welcome.jsp");
+				} else if(type.equalsIgnoreCase("student")) {
+					mv.setViewName("/student/student_welcome.jsp");
+				} else if(type.equalsIgnoreCase("admin")) {
+					mv.setViewName("/admin/admin_welcome.jsp");
+				} else {
+					mv.setViewName("/registration.jsp");
+				}
+			} else {
+				mv.setViewName("/registration.jsp");
+			}
+		
 		
 		return mv;
 	}
