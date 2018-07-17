@@ -3,10 +3,10 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<link rel="stylesheet" href="mystylesheet.css">
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Registration</title>
 <style>
- /* Split the screen in half */
 .split {
   height: 100%;
   width: 50%;
@@ -17,19 +17,16 @@
   padding-top: 20px;
 }
 
-/* Control the left side */
 .left {
   left: 0;
   background-color: SeaGreen;
 }
 
-/* Control the right side */
 .right {
   right: 0;
   background-color: Goldenrod;
 }
 
-/* If you want the content centered horizontally and vertically */
 .centered {
   position: absolute;
   top: 50%;
@@ -38,11 +35,10 @@
   text-align: center;
 }
 
-/* Style the image inside the centered container, if needed */
 .centered img {
   width: 150px;
   border-radius: 50%;
-} 
+}
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>
