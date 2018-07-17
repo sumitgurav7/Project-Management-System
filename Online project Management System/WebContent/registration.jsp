@@ -84,12 +84,12 @@
 <div style="border: solid; align:center; text-align: center;line-height: 26pt">
 	<h1>New Registration</h1>
 <form action="newregistration">
-</br>Name             <input type="text" name="fname" placeholder="Full Name"/>
-</br>Email id         <input type="email" name="email" placeholder="Email id"/>
-</br>Password         <input type="password" name="password" id="password" placeholder="Password"/>
+</br>Name <input type="text" name="fname" placeholder="Full Name"/>
+</br>Email id <input type="email" name="email" placeholder="Email id"/>
+</br>Password <input type="password" name="password" id="password" placeholder="Password"/>
 </br>Confirm Password <input type="password" name="cpassword" id="cpassword" placeholder="Confirm Password"/>
-</br>Contact number   <input type="phone" name="phn" placeholder="Contact number"/>
-</br>You are a
+</br>Contact number<input type="phone" name="phn" placeholder="Contact number"/>
+</br>You are a 
  <select value="type" id="type" class="type" name="type">
  <option value="empty">   -----</option>
   <option value="admin">Admin</option>
