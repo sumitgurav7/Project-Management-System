@@ -11,6 +11,8 @@
 
 	<context:component-scan base-package="opms.project.loginreg"/>
 	<context:component-scan base-package="opms.project.students"/>
+	<context:component-scan base-package="opms.project.faculty"/>
+	<context:component-scan base-package="opms.project.admin"/>
 
 	<mvc:annotation-driven />
 	

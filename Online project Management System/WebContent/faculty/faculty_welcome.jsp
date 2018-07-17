@@ -7,6 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h1>Welcome Faculty</h1>
+<h1> Registration successful </h1>
+<a href="faculty/faculty_login.jsp">click here to login</a>
 </body>
 </html>
