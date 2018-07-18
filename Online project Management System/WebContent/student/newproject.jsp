@@ -44,7 +44,7 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <script type="text/javascript">
     $(function(){
-    	//var teampnrs = {};
+    	window.teampnrs = []
         $("#leadsearchbutton").click(function(event){
             event.preventDefault();
             searchViaAjax();
@@ -58,13 +58,65 @@
         $("#selectmember").click(function(event){
         	event.preventDefault();
         	if($("#singlemember").val() != ""){
-        		$("#allmember").append("<li>" + $("#singlemember").val() + "</li>");
+                var found = 0;
+                for(var i=0; i < teampnrs.length; i++){
+               	 if(teampnrs[i] == $("#member").val()){
+               		 found = 1;
+               	 }
+                }
+                if(found == 0){
+                	teampnrs.push($("#member").val());
+                	$("#allmember").append("<li>" + $("#singlemember").val() + "</li>");
+                	alert(teampnrs);
+                }
         	}
         	
+        });
+        
+        $("#formsubmit").click(function(event){
+        	for(var i=0; i < teampnrs.length; i++){
+              	 if(teampnrs[i] == $("#teamlead").val()){
+              		 found = 1;
+              	 }
+               }
+               if(found == 0){
+               	teampnrs.push($("#teamlead").val());
+               	alert(teampnrs);
+               }
+        	var data = {}
+        	alert("Form submit clicked");
+        	data["title"] = $("#title").val();
+        	data["abs"] = $("#abstract").val();
+        	data["lead"] = $("#teamlead").val();
+        	data["members"] = teampnrs;
+        	alert(data);
+        	var jsonString = JSON.stringify(teampnrs);
+        	alert("before ajax function");
+        	$.ajax({
+    			type : "POST",
+    			contentType : "application/json",
+    			url : "${pageContext.request.contextPath}/createNewProject",
+    			data : JSON.stringify(data),
+    			dataType : 'json',
+    			timeout : 100000,
+    			success : function(data) {
+    				console.log("SUCCESS: ", data);
+    				alert(data);
+    			},
+    			error : function(e) {
+    				console.log("ERROR: ", e);
+    				alert(e);
+    			},
+    			done : function(e) {
+    				console.log("DONE");
+    			}
+    		});
+        	alert("after ajax function");
         });
     })
 
     function searchViaAjax() {
+    	alert("searchviaajex called");
       var data = {}
       var pnr = $("#teamlead").val();
       $.ajax({
@@ -75,7 +127,6 @@
         },
          success : function(data) {
          console.log("SUCCESS: ", data);
-        // teampnrs.push(pnr);
          $("#leadfinalname").val(data);         
         },
         error : function(e) {
@@ -101,8 +152,7 @@
           },
            success : function(data) {
            console.log("SUCCESS: ", data);
-           $("#singlemember").val(data);     
-           //teampnrs.push(pnr);
+           $("#singlemember").val(data);  
           },
           error : function(e) {
             console.log("ERROR: ", e);
@@ -134,14 +184,14 @@
     <h3>Create New Project</h3>
     <div class="links">
 	<form id="projectform" action="">
-      </br>Title         <input type="text" placeholder="Project Title" style="width:500px; height:40px;" />
+      </br>Title         <input type="text" id="title" placeholder="Project Title" style="width:500px; height:40px;" />
 
 
-      </br>Abstract   <input type="text" placeholder="Abstract" style="width: 500px; height: 80px"> 
+      </br>Abstract   <input type="text" id="abstract" placeholder="Abstract" style="width: 500px; height: 80px"> 
 
         </br>Team Leader   <input type="text" name="teamlead" id="teamlead" placeholder="PNR">  <button id="leadsearchbutton">search</button>  <input type="text" id="leadfinalname" readonly >
         </br>Team Members  <input type="text" id="member" placeholder="PNR">  <button id="membersearchbutton">search</button>  <input id="singlemember" type="text" readonly >  <button id="selectmember">select</button>  <span id="allmember" style="height: 70px;"></span>
-      <button>submit</button>
+      <button id="formsubmit">submit</button>
       </form>
     </div> 
 </div>
