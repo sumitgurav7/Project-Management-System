@@ -11,7 +11,7 @@
 	<h1>Hello Student</h1>
 	
 	<form action="student_logins" method="post">
-	
+	${entryVali}<hr>
 		Username: <input type="text" name="username">
 		Password: <input type="text" name="password">
 		<input type="submit"><br>

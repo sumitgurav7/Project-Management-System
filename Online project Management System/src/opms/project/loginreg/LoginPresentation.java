@@ -128,7 +128,7 @@ public class LoginPresentation {
 			if(validate == true)
 			{
 				
-				mv.setViewName("student_dashboard.jsp");
+				mv.setViewName("/student/student_dashboard.jsp");
 			
 			}
 			else
@@ -161,7 +161,7 @@ public class LoginPresentation {
 			if(validate == true)
 			{
 				
-				mv.setViewName("faculty_dashboard.jsp");
+				mv.setViewName("/faculty/faculty_dashboard.jsp");
 			
 			}
 			else
@@ -194,7 +194,7 @@ public class LoginPresentation {
 			if(validate == true)
 			{
 				
-				mv.setViewName("admin_dashboard.jsp");
+				mv.setViewName("/admin/admin_dashboard.jsp");
 			
 			}
 			else
