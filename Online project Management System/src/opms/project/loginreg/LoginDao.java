@@ -62,8 +62,8 @@ public class LoginDao {
 	}
 
 	public boolean createNewLogin(String username, String password) {
-		String cmd = "insert into login_table values(?,?,?,?,?)";
-		Object x[] = {username, password, new Date(),java.sql.Date.valueOf(LocalDate.now().plusMonths(6)),new Date()};
+		String cmd = "insert into login_table values(?,?,?,?,?,?)";
+		Object x[] = {username, password, new Date(),java.sql.Date.valueOf(LocalDate.now().plusMonths(6)),new Date(),0};
 		int row = t.update(cmd, x);
 		if(row <= 0) {
 			return false;
