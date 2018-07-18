@@ -3,6 +3,7 @@ package opms.project.loginreg;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import opms.project.students.*;
@@ -11,6 +12,12 @@ import opms.project.students.*;
 public class LoginPresentation {
 	private LoginService s;
 
+	
+	public LoginPresentation() {
+		// TODO Auto-generated constructor stub
+		System.out.println("Controller chal ra hai");
+	
+	}
 	@Autowired
 	public void setS(LoginService s) {
 		this.s = s;
@@ -56,8 +63,52 @@ public class LoginPresentation {
 	 * 
 	 * 
 	 * */
+	@RequestMapping(value="/studentlg", method = RequestMethod.GET)
+	public ModelAndView indexStudent()
+	{
+		ModelAndView mv =  new ModelAndView();
+		
+		mv.setViewName("/student/student_login.jsp");
+		
+		return mv;
+	}
 	
-	@RequestMapping("student/student_login")
+	
+	@RequestMapping(value="/facultylg", method = RequestMethod.GET)
+	public ModelAndView indexFaculty()
+	{
+		ModelAndView mv =  new ModelAndView();
+		
+		mv.setViewName("/faculty/faculty_login.jsp");
+		
+		return mv;
+	}
+	
+	
+	@RequestMapping(value="/adminlg", method = RequestMethod.GET)
+	public ModelAndView indexAdmin()
+	{
+		ModelAndView mv =  new ModelAndView();
+		
+		mv.setViewName("/admin/admin_login.jsp");
+		
+		return mv;
+	}
+	
+	
+	@RequestMapping(value="/regi", method = RequestMethod.GET)
+	public ModelAndView indexRegistration()
+	{
+		ModelAndView mv =  new ModelAndView();
+		
+		mv.setViewName("/registration.jsp");
+		
+		return mv;
+	}
+	
+	
+	
+	@RequestMapping(value="/student_logins", method = RequestMethod.POST)
 	public ModelAndView studLogin(@RequestParam("username") String username, @RequestParam("password") String password)
 	{
 		System.out.println("in student Login");
@@ -67,7 +118,7 @@ public class LoginPresentation {
 		if (username.equals("") || password.equals(""))
 		{
 			mv.addObject("entryVali", "please enter username and password");
-			mv.setViewName("../index.jsp");
+			mv.setViewName("/student/student_login.jsp");
 		}
 		else
 		{
@@ -83,14 +134,14 @@ public class LoginPresentation {
 			else
 			{
 				mv.addObject("entryVali", "please enter valid username and password");
-				mv.setViewName("../index.jsp");
+				mv.setViewName("/student/student_login.jsp");
 			}
 		}
 		
 		return mv;
 	}
 	
-	@RequestMapping("faculty/faculty_login")
+	@RequestMapping("/faculty_login")
 	public ModelAndView faculLogin(@RequestParam("username") String username, @RequestParam("password") String password)
 	{
 		System.out.println("in faculty Login");
@@ -100,7 +151,7 @@ public class LoginPresentation {
 		if (username.equals("") || password.equals(""))
 		{
 			mv.addObject("entryVali", "please enter username and password");
-			mv.setViewName("../index.jsp");
+			mv.setViewName("/faculty/faculty_login.jsp");
 		}
 		else
 		{
@@ -116,14 +167,14 @@ public class LoginPresentation {
 			else
 			{
 				mv.addObject("entryVali", "please enter valid username and password");
-				mv.setViewName("../index.jsp");
+				mv.setViewName("/faculty/faculty_login.jsp");
 			}
 		}
 		
 		return mv;
 	}
 	
-	@RequestMapping("admin/admin_login")
+	@RequestMapping("/admin_login")
 	public ModelAndView adminLogin(@RequestParam("username") String username, @RequestParam("password") String password)
 	{
 		System.out.println("in admin Login");
@@ -133,7 +184,7 @@ public class LoginPresentation {
 		if (username.equals("") || password.equals(""))
 		{
 			mv.addObject("entryVali", "please enter username and password");
-			mv.setViewName("../index.jsp");
+			mv.setViewName("/admin/admin_login.jsp");
 		}
 		else
 		{
@@ -149,7 +200,7 @@ public class LoginPresentation {
 			else
 			{
 				mv.addObject("entryVali", "please enter valid username and password");
-				mv.setViewName("../index.jsp");
+				mv.setViewName("/admin/admin_login.jsp");
 			}
 		}
 		

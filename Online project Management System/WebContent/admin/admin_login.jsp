@@ -15,7 +15,7 @@
 		Username: <input type="text" name="username">
 		Password: <input type="text" name="password">
 		<input type="submit">
-		<a href="../registration.jsp">New User? Sign Up here</a>
+		<a href="regi">New User? Sign Up here</a>
 	
 	</form>
 

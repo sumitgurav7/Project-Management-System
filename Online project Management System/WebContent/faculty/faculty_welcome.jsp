@@ -8,6 +8,6 @@
 </head>
 <body>
 <h1> Registration successful </h1>
-<a href="faculty/faculty_login.jsp">click here to login</a>
+<a href="facultylg">click here to login</a>
 </body>
 </html>
