@@ -1,7 +1,5 @@
 package opms.project.loginreg;
 
-<<<<<<< HEAD
-=======
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +14,6 @@ import opms.project.faculty.FacultyDao;
 import opms.project.students.*;
 
 
->>>>>>> branch 'master' of https://prachibhardwaj@bitbucket.org/prachibhardwaj/online-project-management-system.git
 import java.time.LocalDate;
 import java.util.Date;
 
@@ -73,18 +70,6 @@ private JdbcTemplate t;
 		Object x[] = {username};
 		int row = t.update(cmd, x);
 		if(row <=0) {
-			return false;
-		}
-		return true;
-	}
-<<<<<<< HEAD
-=======
-
-	public boolean createNewLogin(String username, String password) {
-		String cmd = "insert into login_table values(?,?,?,?,?)";
-		Object x[] = {username, password, new Date(),java.sql.Date.valueOf(LocalDate.now().plusMonths(6)),new Date()};
-		int row = t.update(cmd, x);
-		if(row <= 0) {
 			return false;
 		}
 		return true;
@@ -178,7 +163,6 @@ private JdbcTemplate t;
 		
 		return false;
 	}
->>>>>>> branch 'master' of https://prachibhardwaj@bitbucket.org/prachibhardwaj/online-project-management-system.git
 
 	public boolean createNewLogin(String username, String password) {
 		String cmd = "insert into login_table values(?,?,?,?,?,?)";

@@ -43,10 +43,7 @@ public class LoginPresentation {
 				}
 			} else {
 				mv.setViewName("/registration.jsp");
-			}
-<<<<<<< HEAD
-=======
-		
+			}		
 		
 		return mv;
 	}
@@ -216,7 +213,6 @@ public class LoginPresentation {
 			}
 		}
 		
->>>>>>> branch 'master' of https://prachibhardwaj@bitbucket.org/prachibhardwaj/online-project-management-system.git
 		return mv;
 	}
 }

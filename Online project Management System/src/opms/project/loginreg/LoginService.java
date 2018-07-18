@@ -67,11 +67,7 @@ private LoginDao ld;
 		Admin ad = new Admin(email, phn, fname);
 		boolean res = ld.newAdminRegister(ad);
 		return res;
-	}
-<<<<<<< HEAD
-}
-=======
-	
+	}	
 	
 	
 	
@@ -109,4 +105,3 @@ private LoginDao ld;
 		
 	}
 }
->>>>>>> branch 'master' of https://prachibhardwaj@bitbucket.org/prachibhardwaj/online-project-management-system.git
