@@ -100,7 +100,7 @@ private JdbcTemplate t;
 			return false;
 		}
 		else {
-			String cmdlt = "select email_id from login_table where email_id = ? and password = ?";
+			String cmdlt = "select username from login_table where username = ? and password = ?";
 			Object y[] = {username,password};
 			RowMapper<String> ro = new logtab();
 			List<String> li = t.query(cmdlt, y, ro);
@@ -125,7 +125,7 @@ private JdbcTemplate t;
 			return false;
 		}
 		else {
-			String cmdlt = "select email_id from login_table where email_id = ? and password = ?";
+			String cmdlt = "select username from login_table where username = ? and password = ?";
 			Object y[] = {username,password};
 			RowMapper<String> ro = new logtab();
 			List<String> li = t.query(cmdlt, y, ro);
@@ -150,7 +150,7 @@ private JdbcTemplate t;
 			return false;
 		}
 		else {
-			String cmdlt = "select email_id from login_table where email_id = ? and password = ?";
+			String cmdlt = "select username from login_table where username = ? and password = ?";
 			Object y[] = {username,password};
 			RowMapper<String> ro = new logtab();
 			List<String> li = t.query(cmdlt, y, ro);

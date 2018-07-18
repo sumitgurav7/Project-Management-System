@@ -33,11 +33,11 @@ public class LoginPresentation {
 			result = s.createNewRegistration(fname, email, phn, type, dept, desig, pnr, password);
 			if(result) {
 				if(type.equalsIgnoreCase("faculty")) {
-					mv.setViewName("/faculty/faculty_welcome.jsp");
+					mv.setViewName("/faculty/faculty_login.jsp");
 				} else if(type.equalsIgnoreCase("student")) {
-					mv.setViewName("/student/student_welcome.jsp");
+					mv.setViewName("/student/student_login.jsp");
 				} else if(type.equalsIgnoreCase("admin")) {
-					mv.setViewName("/admin/admin_welcome.jsp");
+					mv.setViewName("/admin/admin_login.jsp");
 				} else {
 					mv.setViewName("/registration.jsp");
 				}
@@ -137,7 +137,7 @@ public class LoginPresentation {
 			if(validate == true)
 			{
 				
-				mv.setViewName("/student/student_dashboard.jsp");
+				mv.setViewName("/student/student_welcome.jsp");
 			
 			}
 			else
@@ -170,7 +170,7 @@ public class LoginPresentation {
 			if(validate == true)
 			{
 				
-				mv.setViewName("/faculty/faculty_dashboard.jsp");
+				mv.setViewName("/faculty/faculty_welcome.jsp");
 			
 			}
 			else
@@ -203,7 +203,7 @@ public class LoginPresentation {
 			if(validate == true)
 			{
 				
-				mv.setViewName("/admin/admin_dashboard.jsp");
+				mv.setViewName("/admin/admin_welcome.jsp");
 			
 			}
 			else

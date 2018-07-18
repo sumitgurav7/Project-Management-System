@@ -8,6 +8,6 @@
 </head>
 <body>
 <h2>Thank you for using Project Management System</h2>
-<h3>To login again click here <a href="">login</a></h3>
+<h3>To login again click here <a href="index.jsp">login</a></h3>
 </body>
 </html>
