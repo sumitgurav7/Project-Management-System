@@ -10,7 +10,7 @@ import opms.project.students.*;
 @Service
 public class LoginService {
 
-	private LoginDao ld;
+private LoginDao ld;
 	
 	@Autowired
 	public void setLd(LoginDao ld) {
@@ -68,4 +68,45 @@ public class LoginService {
 		boolean res = ld.newAdminRegister(ad);
 		return res;
 	}
+<<<<<<< HEAD
 }
+=======
+	
+	
+	
+	
+	
+	/*
+	 * 
+	 * Below this line its my code so altering is allowed
+	 * 
+	 * 
+	 * */
+	public boolean studServLog(String username, String password) {
+		// TODO Auto-generated method stub
+		System.out.println("in student service" + username);
+		boolean validate = ld.studValidate(username,password);
+		
+		return validate;
+	}
+
+	public boolean faculServLog(String username, String password) {
+		// TODO Auto-generated method stub
+		System.out.println("in faculty service" + username);
+		boolean validate = ld.faculValidate(username,password);
+		
+		return validate;
+		
+	}
+
+	public boolean adminServLog(String username, String password) {
+		// TODO Auto-generated method stub
+		
+		System.out.println("in admin service" + username);
+		boolean validate = ld.adminValidate(username,password);
+		
+		return validate;
+		
+	}
+}
+>>>>>>> branch 'master' of https://prachibhardwaj@bitbucket.org/prachibhardwaj/online-project-management-system.git

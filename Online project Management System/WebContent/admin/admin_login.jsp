@@ -7,8 +7,19 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h1> Registration successful </h1>
-<a href="hmpg">Home</a><hr>
-<a href="facultylg">click here to login</a>
+
+	<h1>Hello Admin</h1>
+	
+	<a href="hmpg">Home</a><hr>
+	<form action="admin_login">
+	${entryVali}<hr>
+		Username: <input type="text" name="username">
+		Password: <input type="text" name="password">
+		<input type="submit">
+		<br>
+		<a href="regi">New User? Sign Up here</a>
+	
+	</form>
+
 </body>
 </html>

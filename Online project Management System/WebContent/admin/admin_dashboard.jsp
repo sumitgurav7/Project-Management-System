@@ -7,8 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h1> Registration successful </h1>
-<a href="hmpg">Home</a><hr>
-<a href="facultylg">click here to login</a>
+	<a href="hmpg">Home</a><hr>
+	<h1>This is Admin Dashboard</h1>
 </body>
 </html>
