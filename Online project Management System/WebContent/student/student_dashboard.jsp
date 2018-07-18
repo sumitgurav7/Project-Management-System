@@ -8,5 +8,6 @@
 </head>
 <body>
 	<h1>This is Student Dashboard</h1>
+	<a href="hmpg">Home</a><hr>
 </body>
 </html>

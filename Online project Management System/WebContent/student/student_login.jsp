@@ -9,7 +9,7 @@
 <body>
 
 	<h1>Hello Student</h1>
-	
+	<a href="hmpg">Home</a><hr>
 	<form action="student_logins" method="post">
 	${entryVali}<hr>
 		Username: <input type="text" name="username">

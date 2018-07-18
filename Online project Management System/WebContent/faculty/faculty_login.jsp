@@ -9,7 +9,7 @@
 <body>
 
 	<h1>Hello Faculty</h1>
-	
+	<a href="hmpg">Home</a><hr>
 	<form action="faculty_login">
 			${entryVali}<hr>
 		Username: <input type="text" name="username">

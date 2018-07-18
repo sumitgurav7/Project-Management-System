@@ -63,6 +63,17 @@ public class LoginPresentation {
 	 * 
 	 * 
 	 * */
+	
+	@RequestMapping(value="/hmpg", method = RequestMethod.GET)
+	public ModelAndView indexHome()
+	{
+		ModelAndView mv =  new ModelAndView();
+		
+		mv.setViewName("/index.jsp");
+		
+		return mv;
+	}
+	
 	@RequestMapping(value="/studentlg", method = RequestMethod.GET)
 	public ModelAndView indexStudent()
 	{

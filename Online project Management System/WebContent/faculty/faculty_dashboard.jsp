@@ -7,6 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<a href="hmpg">Home</a><hr>
 	<h1>This is Faculty Dashboard</h1>
 </body>
 </html>

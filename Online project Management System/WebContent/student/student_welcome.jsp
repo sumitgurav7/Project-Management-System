@@ -9,5 +9,6 @@
 <body>
 <h1> Registration successful </h1>
 <a href="studentlg">click here to login</a>
+<a href="hmpg">Home</a><hr>
 </body>
 </html>

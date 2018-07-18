@@ -8,6 +8,7 @@
 </head>
 <body>
 <h1> Registration successful </h1>
+<a href="hmpg">Home</a><hr>
 <a href="facultylg">click here to login</a>
 </body>
 </html>
