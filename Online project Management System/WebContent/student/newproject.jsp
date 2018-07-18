@@ -74,16 +74,8 @@
         });
         
         $("#formsubmit").click(function(event){
-        	for(var i=0; i < teampnrs.length; i++){
-              	 if(teampnrs[i] == $("#teamlead").val()){
-              		 found = 1;
-              	 }
-               }
-               if(found == 0){
-               	teampnrs.push($("#teamlead").val());
-               	alert(teampnrs);
-               }
         	var data = {}
+        	teampnrs.push($("#teamlead").val());
         	alert("Form submit clicked");
         	data["title"] = $("#title").val();
         	data["abs"] = $("#abstract").val();
@@ -101,7 +93,11 @@
     			timeout : 100000,
     			success : function(data) {
     				console.log("SUCCESS: ", data);
-    				alert(data);
+    				if(data == true){
+    					alert("Project created successfully");	
+    				} else {
+    					alert("Something went wrong. Please ensure that no member of the team is already associated with any other project (approve/pending approval)");
+    				}
     			},
     			error : function(e) {
     				console.log("ERROR: ", e);

@@ -1,12 +1,17 @@
 package opms.project.project;
 
+import java.util.ArrayList;
+
 public class ProjectObject {
 	String title;
 	String abs;
 	String lead;
-	String[] members;
+	ArrayList<String> members;
 	
-	public ProjectObject(String title, String abs, String lead, String[] members) {
+	public ProjectObject() {
+		
+	}
+	public ProjectObject(String title, String abs, String lead, ArrayList<String> members) {
 		super();
 		this.title = title;
 		this.abs = abs;
@@ -32,10 +37,10 @@ public class ProjectObject {
 	public void setLead(String lead) {
 		this.lead = lead;
 	}
-	public String[] getMembers() {
+	public ArrayList<String> getMembers() {
 		return members;
 	}
-	public void setMembers(String[] members) {
+	public void setMembers(ArrayList<String> members) {
 		this.members = members;
 	}
 	

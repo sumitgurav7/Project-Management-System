@@ -2,6 +2,8 @@ package opms.project.students;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.StringTokenizer;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -16,6 +18,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import opms.project.project.*;
 
 @Controller
@@ -44,21 +49,61 @@ public class StudentPresentation {
 	@RequestMapping(value="/createNewProject",method=RequestMethod.POST, 
             produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
-	public int createNewProject(HttpServletRequest request, HttpServletResponse response)
+	public boolean createNewProject(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		ProjectObject po = new ProjectObject();
+		String title;
+		String abs;
+		String lead;
+		String array;
+		ArrayList<String> members = new ArrayList<String>();
 		StringBuilder sb = new StringBuilder();
 	    BufferedReader reader = request.getReader();
 	    try {
 	        String line;
 	        while ((line = reader.readLine()) != null) {
-	        	//ObjectMapper mapper = new ObjectMapper();
 	            sb.append(line).append('\n');
 	        }
 	    } finally {
 	        reader.close();
 	    }
-	    System.out.println(sb.toString());
-		System.out.println("hello");
-		return 0;
+	    String str = sb.toString();
+	    str = str.replace('{', ' ');
+	    str = str.replace('}', ' ');
+	    str = str.replace('"', ' ');
+	    if(sb.length() > 0) {
+	    	StringTokenizer st0 = new StringTokenizer(str, "[");
+	    	str = st0.nextToken();
+	    	array = st0.nextToken();
+	    	StringTokenizer st = new StringTokenizer(str,",");
+	    	while(st.hasMoreTokens()) {
+	    		String next = st.nextToken();
+	    		StringTokenizer st1 = new StringTokenizer(next,":");
+	    		String label = st1.nextToken();
+	    		String value;
+	    		if(label.contains("title")) {
+	    			value = st1.nextToken();
+	    			title = value;
+	    			po.setTitle(title);
+	    		} else if(label.contains("abs")) {
+	    			value = st1.nextToken();
+	    			abs = value;
+	    			po.setAbs(abs);
+	    		} else if(label.contains("lead")) {
+	    			value = st1.nextToken();
+	    			lead = value;
+	    			po.setLead(lead);
+	    		} else if(label.contains("members")) {
+	    			array = array.replace(']', ' ');
+	    			StringTokenizer st2 = new StringTokenizer(array, ",");
+	    			while(st2.hasMoreTokens()) {
+	    				members.add(st2.nextToken());
+	    			}
+	    			po.setMembers(members);
+	    		}
+	    	}
+	    }
+	    boolean result = s.createNewProject(po);
+		return result;
 	}
 }
