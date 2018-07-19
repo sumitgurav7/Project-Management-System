@@ -43,16 +43,16 @@ public class StudentDao {
 	}
 
 	public int getSumOfProjectIds(ArrayList<String> members) {
-		StringBuilder sb = new StringBuilder();
+		StringBuilder sb = new StringBuilder("SELECT sum(project_id) as sum FROM `student` WHERE pnr in (");
 		int counter = 0;
 		for(String s : members) {
 			s = s.replaceAll("\\s+","");
-			sb.append(s);
+			sb.append('"'+ s + '"');
 			counter++;
 			if(counter < members.size())
 				sb.append(',');
 		}
-		String cmd = "SELECT sum(project_id) as sum FROM `student` WHERE pnr in (?)";
+		String cmd = sb.append(")").toString();
 		System.out.println(cmd);
 		Object x[] = {sb.toString()};
 		RowMapper<Integer> rw = new getProjectSum();
@@ -86,7 +86,7 @@ public class StudentDao {
 	}
 
 	public boolean updateProjectForStudent(ArrayList<String> members, int projectId) {
-		StringBuilder sb = new StringBuilder();
+		StringBuilder sb = new StringBuilder("Update student set project_id=? where pnr in (");
 		int counter = 0;
 		for(String s : members) {
 			s = s.replaceAll("\\s+","");
