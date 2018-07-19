@@ -67,7 +67,6 @@
                 if(found == 0){
                 	teampnrs.push($("#member").val());
                 	$("#allmember").append("<li>" + $("#singlemember").val() + "</li>");
-                	alert(teampnrs);
                 }
         	}
         	
@@ -76,14 +75,11 @@
         $("#formsubmit").click(function(event){
         	var data = {}
         	teampnrs.push($("#teamlead").val());
-        	alert("Form submit clicked");
         	data["title"] = $("#title").val();
         	data["abs"] = $("#abstract").val();
         	data["lead"] = $("#teamlead").val();
         	data["members"] = teampnrs;
-        	alert(data);
         	var jsonString = JSON.stringify(teampnrs);
-        	alert("before ajax function");
         	$.ajax({
     			type : "POST",
     			contentType : "application/json",
@@ -107,12 +103,10 @@
     				console.log("DONE");
     			}
     		});
-        	alert("after ajax function");
         });
     })
 
     function searchViaAjax() {
-    	alert("searchviaajex called");
       var data = {}
       var pnr = $("#teamlead").val();
       $.ajax({

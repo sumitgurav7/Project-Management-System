@@ -82,9 +82,8 @@ public class StudentPresentation {
 				po.getMembers().add(ja.getString(i));
 			}
 		} catch (JSONException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} 
+		}
 	    boolean result = s.createNewProject(po);
 		return result;
 	}
