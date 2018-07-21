@@ -70,7 +70,7 @@
   <select name="member">
     <option>search by</option>
     <option value="email">email-id</option>
-    <option value="pnr">PNR</option>
+    <option value="pnr">PRN</option>
     <option value="dept">Department</option>
   </select>
   &nbsp; &nbsp; &nbsp; &nbsp;
@@ -84,7 +84,7 @@
    <table style="width:100%" border ="1">
   <caption><b><h3>Student Details<h3><b></caption>
   <tr>
-    <th>PNR</th>
+    <th>PRN</th>
     <th>Name</th>
     <th>Email Id</th>
     <th>Department</th>
@@ -111,7 +111,7 @@
 <br>
   <h3>Update Student<h3>
     <div>
-     PNR         <input type="text" id="pnr"><br>
+     PRN         <input type="text" id="pnr"><br>
     Name       <input type="text" id="name"><br>
     Email-Id   <input type="text" id="email"><br>
     Department <input type="text" id="dept"><br>

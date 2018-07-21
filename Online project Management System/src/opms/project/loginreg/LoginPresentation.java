@@ -150,7 +150,7 @@ public class LoginPresentation {
 		return mv;
 	}
 	
-	@RequestMapping("/faculty_login")
+	@RequestMapping(value="/faculty_login", method = RequestMethod.POST)
 	public ModelAndView faculLogin(@RequestParam("username") String username, @RequestParam("password") String password)
 	{
 		System.out.println("in faculty Login");
@@ -183,7 +183,7 @@ public class LoginPresentation {
 		return mv;
 	}
 	
-	@RequestMapping("/admin_login")
+	@RequestMapping(value="/admin_login", method = RequestMethod.POST)
 	public ModelAndView adminLogin(@RequestParam("username") String username, @RequestParam("password") String password)
 	{
 		System.out.println("in admin Login");

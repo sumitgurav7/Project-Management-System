@@ -92,7 +92,7 @@
   <option value="faculty">Faculty</option>
   <option value="student">Student</option>
 </select>
-<div class="pnrdiv" name="pnrdiv" id="pnrdiv" style="visibility: hidden;">PNR <input type="number" name="pnr" placeholder="PNR"/> </div>
+<div class="pnrdiv" name="pnrdiv" id="pnrdiv" style="visibility: hidden;">PRN <input type="number" name="pnr" placeholder="PRN"/> </div>
 <div id="dpt" name="dpt" style="visibility: hidden;">
 </br>Department
  <select value="department" name="department">

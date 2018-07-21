@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>faculty</title>
+<title>project list</title>
 <style type="text/css">
 
 .splitleft {
@@ -51,7 +51,11 @@
 <div  class="splitcenter">
     <div class="panel panel-primary">
       <div class="panel-heading">
-        <a href="faculty/Projects.jsp" class="links"><font color="white">Projects   </font></a>
+        <a href="Projects.jsp" class="links"><font color="white">Projects Lists   </font></a>
+        <a href="viewStatus.jsp" class="links"><font color="white">Status   </font></a>
+        <a href="" class="links"><font color="white">Comments   </font></a>
+        <a href="" class="links"><font color="white">Notification   </font></a>
+        <a href="FileUpload.jsp" class="links"><font color="white">Files   </font></a>
         <a href="../logout.jsp" class="links"><font color="white">Logout      </font></a>
       </div>
     </div>

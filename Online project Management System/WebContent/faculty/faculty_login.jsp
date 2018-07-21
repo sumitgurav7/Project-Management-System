@@ -7,13 +7,13 @@
 <title>Insert title here</title>
 </head>
 <body>
-
-	<h1>Hello Faculty</h1>
+<jsp:include page="./header.jsp"/>
+	<h1>Welcome Faculty</h1>
 	<a href="hmpg">Home</a><hr>
-	<form action="faculty_login">
+	<form action="faculty_login" method="post">
 			${entryVali}<hr>
 		Username: <input type="text" name="username">
-		Password: <input type="text" name="password">
+		Password: <input type="password" name="password">
 		<input type="submit">
 		<a href="regi">New User? Sign Up here</a>
 	
