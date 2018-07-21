@@ -9,6 +9,9 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
@@ -69,41 +72,19 @@ public class StudentPresentation {
 	        reader.close();
 	    }
 	    String str = sb.toString();
-	    str = str.replace('{', ' ');
-	    str = str.replace('}', ' ');
-	    str = str.replace('"', ' ');
-	    if(sb.length() > 0) {
-	    	StringTokenizer st0 = new StringTokenizer(str, "[");
-	    	str = st0.nextToken();
-	    	array = st0.nextToken();
-	    	StringTokenizer st = new StringTokenizer(str,",");
-	    	while(st.hasMoreTokens()) {
-	    		String next = st.nextToken();
-	    		StringTokenizer st1 = new StringTokenizer(next,":");
-	    		String label = st1.nextToken();
-	    		String value;
-	    		if(label.contains("title")) {
-	    			value = st1.nextToken();
-	    			title = value;
-	    			po.setTitle(title);
-	    		} else if(label.contains("abs")) {
-	    			value = st1.nextToken();
-	    			abs = value;
-	    			po.setAbs(abs);
-	    		} else if(label.contains("lead")) {
-	    			value = st1.nextToken();
-	    			lead = value;
-	    			po.setLead(lead);
-	    		} else if(label.contains("members")) {
-	    			array = array.replace(']', ' ');
-	    			StringTokenizer st2 = new StringTokenizer(array, ",");
-	    			while(st2.hasMoreTokens()) {
-	    				members.add(st2.nextToken());
-	    			}
-	    			po.setMembers(members);
-	    		}
-	    	}
-	    }
+	    try {
+			JSONObject json = new JSONObject(str);
+			po.setTitle(json.getString("title"));
+			po.setAbs(json.getString("abs"));
+			po.setLead(json.getString("lead"));
+			JSONArray ja = json.getJSONArray("members");
+			po.setMembers(new ArrayList<String>());
+			for(int i =0; i < ja.length(); i++) {
+				po.getMembers().add(ja.getString(i));
+			}
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
 	    boolean result = s.createNewProject(po);
 		return result;
 	}

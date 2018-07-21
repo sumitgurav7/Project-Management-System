@@ -43,18 +43,18 @@ public class StudentDao {
 	}
 
 	public int getSumOfProjectIds(ArrayList<String> members) {
-		StringBuilder sb = new StringBuilder();
+		StringBuilder sb = new StringBuilder("SELECT sum(project_id) as sum FROM `student` WHERE pnr in (");
 		int counter = 0;
 		for(String s : members) {
 			s = s.replaceAll("\\s+","");
-			sb.append(s);
+			sb.append('"'+ s + '"');
 			counter++;
 			if(counter < members.size())
 				sb.append(',');
 		}
-		String cmd = "SELECT sum(project_id) as sum FROM `student` WHERE pnr in (?)";
+		String cmd = sb.append(")").toString();
 		System.out.println(cmd);
-		Object x[] = {sb.toString()};
+		Object x[] = {};
 		RowMapper<Integer> rw = new getProjectSum();
 		List<Integer> list = t.query(cmd, x, rw);
 		if(list.size()>0) {
@@ -86,18 +86,18 @@ public class StudentDao {
 	}
 
 	public boolean updateProjectForStudent(ArrayList<String> members, int projectId) {
-		StringBuilder sb = new StringBuilder();
+		StringBuilder sb = new StringBuilder("Update student set project_id=? where pnr in (");
 		int counter = 0;
 		for(String s : members) {
 			s = s.replaceAll("\\s+","");
-			sb.append(s);
+			sb.append('"'+ s + '"');
 			counter++;
 			if(counter < members.size())
 				sb.append(',');
 		}
-		String cmd = "Update student set project_id=? where pnr in (?)";
+		String cmd = sb.append(")").toString();
 		System.out.println(cmd);
-		Object x[] = {projectId, sb.toString()};
+		Object x[] = {projectId};
 		int row = t.update(cmd, x);
 		if(row <= 0) {
 			return false;
