@@ -52,4 +52,8 @@ public class Student {
 		this.contact_no = contact_no;
 		this.projectId = projectId;
 	}
+	
+	public Student() {
+		// TODO Auto-generated constructor stub
+	}
 }

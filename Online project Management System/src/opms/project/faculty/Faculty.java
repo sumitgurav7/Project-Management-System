@@ -2,8 +2,12 @@ package opms.project.faculty;
 
 public class Faculty {
 	
-	String email_id,name,department,designation;
-	String contact_no;
+	private String email_id,name,department,designation;
+	private String contact_no;
+	
+	public Faculty() {
+		// TODO Auto-generated constructor stub
+	}
 	
 	public Faculty(String email_id, String name, String department, String designation, String phn) {
 		super();
