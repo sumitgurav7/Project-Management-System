@@ -164,7 +164,7 @@
   </script>
 
 </head>
-<body background="/images/background3.jpg">
+<body background="./images/background3.jpg">
 <div class="splitleft">
 <h3>Welcome to</h3></br><h2>CDAC </br>Project Management System</h2>
 </div>

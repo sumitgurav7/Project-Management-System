@@ -36,7 +36,7 @@
   <p> Project management System is a web project which will be used to evaluate the projects running in any institution. This is an online system in which Admin, Faculty, Students can communicate easily about the project. Student can upload project details from anywhere. Faculty can view all the uploaded documents and can send feedback to the students. At last Admin will evaluate the project .This system saves lot of time and effort. No data or information will be lost by using this system.</div> </div></p>
 <div style="float:right"> 
 
-<img src="https://media.glassdoor.com/l/498158/cdac-office.jpg" height="400" width="700">
+<img src="./images/cdac-office.jpg" height="400" width="700">
 </div></div>
 
  

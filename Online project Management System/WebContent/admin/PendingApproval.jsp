@@ -46,7 +46,7 @@
   
 
 </head>
-<body background="/WebContent/images/background4.jpeg">
+<body background="./images/background4.jpeg">
 <div class="splitleft">
 <h3>Welcome to</h3></br><h2>CDAC </br>Project Management System</h2>
 </div>
