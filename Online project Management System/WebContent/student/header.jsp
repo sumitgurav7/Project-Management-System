@@ -13,7 +13,7 @@
 <nav class="navbar navbar-inverse">
   <div class="container">
 	<ul class="nav navbar-nav" style="margin-left: 20%;font-size: 20px; ">
-		<li><a href="#">Home</a></li>
+		<li><a href="hmpg">Home</a></li>
 		<li><a href="adminlg">Admin</a></li>
 		<li><a href="facultylg">Faculty</a></li>
 		<li><a href="studentlg">Student</a></li>

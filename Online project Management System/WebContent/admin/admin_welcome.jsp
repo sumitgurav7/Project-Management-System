@@ -51,9 +51,9 @@
 <div  class="splitcenter">
     <div class="panel panel-primary">
       <div class="panel-heading">
-        <a href="admin/PendingApproval.jsp" class="links"><font color="white">Pending Approval   </font></a>
-        <a href="admin/ViewMember.jsp" class="links"><font color="white">View Member  </font></a>
-        <a href="../logout.jsp" class="links"><font color="white">Logout      </font></a>
+        <a href="pendingapp" class="links"><font color="white">Pending Approval   </font></a>
+        <a href="viewmember" class="links"><font color="white">View Member  </font></a>
+        <a href="logout" class="links"><font color="white">Logout      </font></a>
       </div>
     </div>
 </div>

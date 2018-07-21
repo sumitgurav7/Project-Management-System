@@ -51,11 +51,11 @@
 <div  class="splitcenter">
 		<div class="panel panel-primary">
 			<div class="panel-heading">
-				<a href="student/newproject.jsp" class="links"><font color="white">My Project   </font></a>
-				<a href="student/FileUpload.jsp" class="links"><font color="white">Files Uploaded   </font></a>
-				<a href="student/viewStatus.jsp" class="links"><font color="white">View Status  </font></a>
-				<a href="student/Discussion.jsp" class="links"><font color="white">Discussion   </font></a>
-        <a href="../logout.jsp" class="links"><font color="white">Logout      </font></a>
+				<a href="newproject" class="links"><font color="white">My Project   </font></a>
+				<a href="fileupload" class="links"><font color="white">Files Uploaded   </font></a>
+				<a href="viewstat" class="links"><font color="white">View Status  </font></a>
+				<a href="stdiscuss" class="links"><font color="white">Discussion   </font></a>
+        <a href="logout" class="links"><font color="white">Logout      </font></a>
 			</div>
 		</div>
 	</body>

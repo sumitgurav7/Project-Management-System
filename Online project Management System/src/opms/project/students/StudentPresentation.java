@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -105,5 +106,57 @@ public class StudentPresentation {
 	    }
 	    boolean result = s.createNewProject(po);
 		return result;
+	}
+	
+	
+	
+	/*hello
+	 * 
+	 * 
+	 * Below this is code that can be altered
+	 * 
+	 * */
+	
+	
+	
+	@RequestMapping("/newproject")
+	public ModelAndView nproj()
+	{
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("student/newproject.jsp");
+		return mv;
+	}
+	
+	
+	@RequestMapping("/fileupload")
+	public ModelAndView fupload()
+	{
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("student/FileUpload.jsp");
+		return mv;
+	}
+	
+	@RequestMapping("/viewstat")
+	public ModelAndView viewStat()
+	{
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("student/viewStatus.jsp");
+		return mv;
+	}
+	
+	@RequestMapping("/stdiscuss")
+	public ModelAndView stdisc()
+	{
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("student/Discussion.jsp");
+		return mv;
+	}
+	
+	@RequestMapping("/logout")
+	public ModelAndView lout()
+	{
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("logout.jsp");
+		return mv;
 	}
 }
