@@ -99,32 +99,70 @@ public class AdminDao {
 			{return list;}
 		else
 			{return list;}
-
 	}
 	
-	public boolean approveLogin(String username) {
-		StringBuilder sb = new StringBuilder("Update login_table set enabled=1 where username= ");
+	public boolean updateLogin(String username, int value) {
+		String cmd = "";
+		int row = 0;
+		if(value == 1) {
+			cmd = "Update login_table set enabled=? where username= ?";
 			username = username.replaceAll("\\s+","");
-			sb.append('"'+ username + '"');
-		String cmd = sb.append(")").toString();
-		System.out.println(cmd);
-		int row = t.update(cmd);
+			Object[] x = {value, username};
+			row = t.update(cmd, x);
+		} else if(value == 2) {
+			cmd = "delete from login_table where username = ?";
+			username = username.replaceAll("\\s+","");
+			Object[] x = {username};
+			row = t.update(cmd, x);
+		}
+		
 		if(row <= 0) {
 			return false;
 		}
 		return true;
 	}
 	
-	public boolean approveProject(int projectId) {
-		StringBuilder sb = new StringBuilder("Update project set status=1 where project_id= ");
-			sb.append(projectId);
-		String cmd = sb.append(")").toString();
+	public boolean updateProject(String projectId, int value) {
+		String cmd = "Update project set status=? where project_id= ?";
+		Object[] x = {value, projectId};
 		System.out.println(cmd);
-		int row = t.update(cmd);
+		int row = t.update(cmd, x);
 		if(row <= 0) {
 			return false;
 		}
 		return true;
 	}
 
+	public List<ProjectObject> getGuidePendingProjects() {
+		List<ProjectObject> list = null;
+		String cmd = "select * from project where status != 2 and guide = ?";
+		Object[] x = {""};
+		RowMapper<ProjectObject> rw = new getProjectDataAdmin();
+		list = t.query(cmd, rw, x);
+		if(list.size()>0) {
+			return list;
+		}
+		else{
+			return list;
+		}
+	}
+
+	public List<Faculty> getAllFacultyList() {
+		List<Faculty> list = null;
+		String cmd = "select * from faculty";
+		RowMapper<Faculty> rw = new getFacultyDataAdmin();
+		list = t.query(cmd, rw);
+		return list;
+	}
+
+	public boolean assignFacultyToProject(String projectId, String facultyMailId) {
+		String cmd = "Update project set guide=? where project_id= ?";
+		Object[] x = {facultyMailId, projectId};
+		System.out.println(cmd);
+		int row = t.update(cmd, x);
+		if(row <= 0) {
+			return false;
+		}
+		return true;
+	}
 }

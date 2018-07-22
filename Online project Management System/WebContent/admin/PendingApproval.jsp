@@ -11,32 +11,49 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script type="text/javascript">
 	$(function(){
- 	   $("#approvelogin").click(function(event){
+ 	   $(".approvelogin").click(function(event){
  	       event.preventDefault();
-    	    handleLoginViaAjax(1);
+ 	       var username = $(this).parent().siblings("td:eq(0)").text();
+ 	       handleLoginViaAjex(1, username);
     	});
+ 	   
+ 	  $(".rejectLogin").click(function(event){
+	       event.preventDefault();
+	       var username = $(this).parent().siblings("td:eq(0)").text();
+	       handleLoginViaAjex(2, username);
+   		});
+ 	  
+ 	   $(".approveProject").click(function(event){
+ 	       event.preventDefault();
+ 	       var projectid = $(this).parent().siblings("td:eq(0)").text();
+ 	      handleProjectViaAjex(1, projectid);
+ 	   });
+ 	   
+ 	  $(".rejectProject").click(function(event){
+	       event.preventDefault();
+	       var projectid = $(this).parent().siblings("td:eq(0)").text();
+	      handleProjectViaAjex(2, projectid);
+	   });
 	});
 	
-	function handleLoginViaAjex(var valToPass){
+	function handleLoginViaAjex(){
     	var data = {}
-    	data["username"] = $(this).parent().siblings("td:eq(0)").text();
-    	alert(data["username"]);
-    	date["valToPass"] = valToPass;
-    	alert(data);
+    	data["username"] = arguments[1];
+    	data["valToPass"] = arguments[0];
     	$.ajax({
 			type : "POST",
 			contentType : "application/json",
-			url : "${pageContext.request.contextPath}/approveLogin",
+			url : "${pageContext.request.contextPath}/updateLogin",
 			data : JSON.stringify(data),
 			dataType : 'json',
 			async : false,
-			//timeout : 100000,
+			timeout : 100000,
 			success : function(data) {
 				console.log("SUCCESS: ", data);
 				if(data == true){
-					alert("Project created successfully");	
+					alert("Action completed successfully");	
 				} else {
-					alert("Something went wrong. Please ensure that no member of the team is already associated with any other project (approve/pending approval)");
+					alert("Action did not complete successfully");
 				}
 			},
 			error : function(e) {
@@ -49,26 +66,25 @@
 		});
     }
 	
-	function handleProjectViaAjex(var valToPass){
+	function handleProjectViaAjex(){
     	var data = {}
-    	data["projectId"] = $(this).parent().siblings("td:eq(0)").text();
-    	alert(data["username"]);
-    	date["valToPass"] = valToPass;
-    	alert(data);
+    	data["projectId"] = arguments[1];
+    	data["valToPass"] = arguments[0];
+		alert("approve project called");
     	$.ajax({
 			type : "POST",
 			contentType : "application/json",
-			url : "${pageContext.request.contextPath}/approveLogin",
+			url : "${pageContext.request.contextPath}/updateProject",
 			data : JSON.stringify(data),
 			dataType : 'json',
 			async : false,
-			//timeout : 100000,
+			timeout : 100000,
 			success : function(data) {
 				console.log("SUCCESS: ", data);
 				if(data == true){
-					alert("Project created successfully");	
+					alert("Action completed successfully");	
 				} else {
-					alert("Something went wrong. Please ensure that no member of the team is already associated with any other project (approve/pending approval)");
+					alert("Action did not complete successfully");
 				}
 			},
 			error : function(e) {
@@ -129,6 +145,7 @@
       <div class="panel-heading">
         <a href="pendingapp" class="links"><font color="white">Pending Approval   </font></a>
         <a href="viewmember" class="links"><font color="white">View Member  </font></a>
+        <a href="assignFaculty" class="links"><font color="white">Assign Faculty  </font></a>
         <a href="logout" class="links"><font color="white">Logout      </font></a>
       </div>
     </div>
@@ -144,15 +161,14 @@
   </tr>
   <c:forEach items="${pendingLoginList}" var = "i">
   <tr>
-  	
   	<td>${i.username}</td>
   	<td>${i.valid_from}</td>
   	<td>${i.valid_upto}</td>
   	<td>
-  		<input type="submit" id="approvelogin" value="Approve">
+  		<input type="submit" class="approvelogin" value="Approve">
   	</td>
   	<td>
-  	<input type="submit" id="rejectLogin" value="Reject">
+  	<input type="submit" class="rejectLogin" value="Reject">
   	</td>
   	
   </tr>
@@ -165,10 +181,8 @@
     <th>Project Id</th>
     <th>Title  </th>
     <th>Lead PRN</th>
-    <th>View Details</th>
     <th>Approve</th>
     <th>Reject</th>
-    <th>Assign faculty</th>
   </tr>
   <c:forEach items="${pendingProjectList}" var = "j">
   <tr>
@@ -177,16 +191,10 @@
   	<td>${j.title}</td>
   	<td>${j.lead}</td>
   	<td>
-		<input type="submit" id="viewProjectDetails" value="View Details">
+  	<input type="submit" class="approveProject" value="Approve">
   	</td>
   	<td>
-  	<input type="submit" id="approveProject" value="Approve">
-  	</td>
-  	<td>
-  	<input type="submit" id="rejectProject" value="Reject">
-  	</td>
-  	<td>
-  	<input type="submit" id="assign" value="Assign">
+  	<input type="submit" class="rejectProject" value="Reject">
   	</td>
   </tr>
   </c:forEach>  

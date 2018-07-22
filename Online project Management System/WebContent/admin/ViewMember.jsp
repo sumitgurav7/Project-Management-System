@@ -54,6 +54,7 @@
       <div class="panel-heading">
         <a href="pendingapp" class="links"><font color="white">Pending Approval   </font></a>
         <a href="viewmember" class="links"><font color="white">View Member  </font></a>
+        <a href="assignFaculty" class="links"><font color="white">Assign Faculty  </font></a>
         <a href="logout" class="links"><font color="white">Logout      </font></a>
       </div>
     </div>

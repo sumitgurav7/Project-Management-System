@@ -62,11 +62,29 @@ public class AdminService {
 		return ad.getAllPendingProjects();
 	}
 
-	public boolean approveLogin(String username) {
-		return ad.approveLogin(username);
+	public boolean updateLogin(String username, int value) {
+		return ad.updateLogin(username, value);
 	}
 
-	public boolean approveProject(int projectId) {
-		return ad.approveProject(projectId);
+	public boolean updateProject(String projectId, int value) {
+		return ad.updateProject(projectId, value);
+	}
+
+
+
+
+	public List<ProjectObject> getGuidePendingProjects() {
+		return ad.getGuidePendingProjects();
+	}
+
+
+
+
+	public List<Faculty> getAllFacultyList() {
+		return ad.getAllFacultyList();
+	}
+
+	public boolean assignFacultyToProject(String projectId, String facultyMailId) {
+		return ad.assignFacultyToProject(projectId, facultyMailId);
 	}
 }

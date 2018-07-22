@@ -143,12 +143,13 @@ public class AdminPresentation {
 		return mv;
 	}
 	
-	@RequestMapping(value="/approveLogin",method=RequestMethod.POST,
+	@RequestMapping(value="/updateLogin",method=RequestMethod.POST,
 			produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
-	public boolean approveLogin(HttpServletRequest request, HttpServletResponse response) throws IOException
+	public boolean updateLogin(HttpServletRequest request, HttpServletResponse response) throws IOException
 	{
 		String username="";
+		int value= 0;
 		StringBuilder sb = new StringBuilder();
 	    BufferedReader reader = request.getReader();
 	    try {
@@ -163,18 +164,20 @@ public class AdminPresentation {
 	    try {
 			JSONObject json = new JSONObject(str);
 			username = json.getString("username");
+			value = json.getInt("valToPass");
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
-	    return s.approveLogin(username);
+	    return s.updateLogin(username, value);
 	}
 	
-	@RequestMapping(value="/approveProject",method=RequestMethod.POST,
+	@RequestMapping(value="/updateProject",method=RequestMethod.POST,
 			produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	public boolean approveProject(HttpServletRequest request, HttpServletResponse response) throws IOException
 	{
-		String username="";
+		String projectId="";
+		int value = 0;
 		StringBuilder sb = new StringBuilder();
 	    BufferedReader reader = request.getReader();
 	    try {
@@ -188,11 +191,52 @@ public class AdminPresentation {
 	    String str = sb.toString();
 	    try {
 			JSONObject json = new JSONObject(str);
-			username = json.getInt("username");
+		    projectId = json.getString("projectId");
+		    value = json.getInt("valToPass");
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
-	    return s.approveLogin(username);
+	    return s.updateProject(projectId, value);
 	}
 
+	@RequestMapping ("/assignFaculty")
+	@ResponseBody
+	public ModelAndView getGuidePendingInfo() {
+		ModelAndView mv = new ModelAndView();
+		List<ProjectObject> projectlist = s.getGuidePendingProjects();
+		List<Faculty> facultylist = s.getAllFacultyList();
+		mv.addObject("facultylist", facultylist);
+		mv.addObject("pendingProjectList", projectlist);
+		mv.setViewName("admin/assignFaculty.jsp");
+		return mv;
+	}
+	
+	@RequestMapping(value="/assignFacultyToProject",method=RequestMethod.POST,
+			produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+	@ResponseBody
+	public boolean assignFacultyToProject(HttpServletRequest request, HttpServletResponse response) throws IOException
+	{
+		String projectId="";
+		String facultyMailId ="";
+		StringBuilder sb = new StringBuilder();
+	    BufferedReader reader = request.getReader();
+	    try {
+	        String line;
+	        while ((line = reader.readLine()) != null) {
+	            sb.append(line).append('\n');
+	        }
+	    } finally {
+	        reader.close();
+	    }
+	    String str = sb.toString();
+	    try {
+			JSONObject json = new JSONObject(str);
+		    projectId = json.getString("projectid");
+		    facultyMailId = json.getString("facultyemail");
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+	    return s.assignFacultyToProject(projectId, facultyMailId);
+	}
+	
 }
