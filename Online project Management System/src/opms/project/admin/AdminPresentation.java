@@ -1,16 +1,30 @@
 package opms.project.admin;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import opms.project.faculty.Faculty;
 import opms.project.students.Student;
+import opms.project.loginreg.Login;
+import opms.project.project.ProjectObject;
 
 @Controller
 public class AdminPresentation {
@@ -28,13 +42,13 @@ public class AdminPresentation {
 	
 	}
 	
-	@RequestMapping(value="/pendingapp",method=RequestMethod.GET)
+	/*@RequestMapping(value="/pendingapp",method=RequestMethod.GET)
 	public ModelAndView pendingAppr()
 	{
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("admin/PendingApproval.jsp");
 		return mv;
-	}
+	}*/
 	
 	
 	@RequestMapping(value="/viewmember",method=RequestMethod.GET)
@@ -118,5 +132,67 @@ public class AdminPresentation {
 		return mv;
 	}
 	
+	@RequestMapping(value="/pendingapp",method=RequestMethod.GET)
+	public ModelAndView getPendingInfo() {
+		ModelAndView mv = new ModelAndView();
+		List<Login> loginlist = s.getAllPendingLogins();
+		mv.addObject("pendingLoginList", loginlist);
+		List<ProjectObject> projectlist = s.getAllPendingProjects();
+		mv.addObject("pendingProjectList", projectlist);
+		mv.setViewName("admin/PendingApproval.jsp");
+		return mv;
+	}
 	
+	@RequestMapping(value="/approveLogin",method=RequestMethod.POST,
+			produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+	@ResponseBody
+	public boolean approveLogin(HttpServletRequest request, HttpServletResponse response) throws IOException
+	{
+		String username="";
+		StringBuilder sb = new StringBuilder();
+	    BufferedReader reader = request.getReader();
+	    try {
+	        String line;
+	        while ((line = reader.readLine()) != null) {
+	            sb.append(line).append('\n');
+	        }
+	    } finally {
+	        reader.close();
+	    }
+	    String str = sb.toString();
+	    try {
+			JSONObject json = new JSONObject(str);
+			username = json.getString("username");
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+	    return s.approveLogin(username);
+	}
+	
+	@RequestMapping(value="/approveProject",method=RequestMethod.POST,
+			produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+	@ResponseBody
+	public boolean approveProject(HttpServletRequest request, HttpServletResponse response) throws IOException
+	{
+		String username="";
+		StringBuilder sb = new StringBuilder();
+	    BufferedReader reader = request.getReader();
+	    try {
+	        String line;
+	        while ((line = reader.readLine()) != null) {
+	            sb.append(line).append('\n');
+	        }
+	    } finally {
+	        reader.close();
+	    }
+	    String str = sb.toString();
+	    try {
+			JSONObject json = new JSONObject(str);
+			username = json.getInt("username");
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+	    return s.approveLogin(username);
+	}
+
 }

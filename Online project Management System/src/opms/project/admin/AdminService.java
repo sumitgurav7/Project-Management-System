@@ -1,11 +1,14 @@
 package opms.project.admin;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import opms.project.faculty.Faculty;
+import opms.project.loginreg.Login;
+import opms.project.project.ProjectObject;
 import opms.project.students.Student;
 
 @Service
@@ -51,4 +54,19 @@ public class AdminService {
 		return ad.delStudentDao(pnr);
 	}
 
+	public List<Login> getAllPendingLogins() {
+		return ad.getAllPendingLogins();
+	}
+
+	public List<ProjectObject> getAllPendingProjects() {
+		return ad.getAllPendingProjects();
+	}
+
+	public boolean approveLogin(String username) {
+		return ad.approveLogin(username);
+	}
+
+	public boolean approveProject(int projectId) {
+		return ad.approveProject(projectId);
+	}
 }

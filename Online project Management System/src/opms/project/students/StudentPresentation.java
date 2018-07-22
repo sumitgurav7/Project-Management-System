@@ -56,11 +56,6 @@ public class StudentPresentation {
 	public boolean createNewProject(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		ProjectObject po = new ProjectObject();
-		String title;
-		String abs;
-		String lead;
-		String array;
-		ArrayList<String> members = new ArrayList<String>();
 		StringBuilder sb = new StringBuilder();
 	    BufferedReader reader = request.getReader();
 	    try {
