@@ -17,6 +17,7 @@ import org.springframework.stereotype.Repository;
 
 import com.mysql.jdbc.Statement;
 
+import opms.project.admin.getStudentDataAdmin;
 import opms.project.project.ProjectObject;
 
 
@@ -103,6 +104,47 @@ public class StudentDao {
 			return false;
 		}
 		return true;
+	}
+
+	public ProjectObject returnReportDao(String username) {
+		// TODO Auto-generated method stub
+		String pnr = username;
+		String cmd = "select project_id from student where pnr=?";
+		Object x[] = {pnr};
+		RowMapper<Integer> rw = new getStudentProjectInfo();
+		List<Integer> pr_id = t.query(cmd, x, rw);
+		Integer project_id;
+		if(pr_id.size()>0)
+		{ 	project_id = pr_id.get(0);
+			String cmad = "select * from project where project_id =?";
+			Object valuesFill[] = {project_id};
+			RowMapper<ProjectObject> romap = new getProjectInfo();
+			List<ProjectObject> project = t.query(cmad, valuesFill, romap);
+			if(project.size()>0)
+				{return project.get(0);}
+			else
+			{return null;}
+		}	
+		else
+			return null;
+		
+		
+	}
+
+	public List<Student> returnMembersDao(int projectId) {
+		// TODO Auto-generated method stub
+		
+		
+		String cmad = "select * from student where project_id =?";
+		Object valuesFill[] = {projectId};
+		RowMapper<Student> romap = new getStudentDataAdmin();
+		List<Student> project = t.query(cmad, valuesFill, romap);
+		if(project.size()>0)
+			{return project;}
+	else
+		return null;
+		
+		
 	}
 
 }
