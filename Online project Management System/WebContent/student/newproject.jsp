@@ -142,12 +142,17 @@
            "pnr" : pnr
           },
            success : function(data) {
-           console.log("SUCCESS: ", data);
-           $("#singlemember").val(data);  
+           
+           if(data.length > 0) {
+           		$("#singlemember").val(data);
+           		console.log("SUCCESS: ", data);
+           } else {
+        	   alert("No student found with PRN " + pnr);
+           }
           },
           error : function(e) {
             console.log("ERROR: ", e);
-            alert("No student found with PNR " + pnr);
+            alert("No student found with PRN " + pnr);
             $("#member").val("");
             //display(e);
           },
@@ -159,7 +164,7 @@
   </script>
 
 </head>
-<body background="./images/background3.jpg">
+<body background="./images/background4.jpeg">
 <div class="splitleft">
 <h3>Welcome to</h3></br><h2>CDAC </br>Project Management System</h2>
 </div>

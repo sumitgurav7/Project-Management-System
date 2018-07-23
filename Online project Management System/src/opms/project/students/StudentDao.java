@@ -43,7 +43,7 @@ public class StudentDao {
 	}
 
 	public int getSumOfProjectIds(ArrayList<String> members) {
-		StringBuilder sb = new StringBuilder("SELECT sum(project_id) as sum FROM `student` WHERE pnr in (");
+		StringBuilder sb = new StringBuilder("SELECT sum(if(project.status = 2, 0, project.project_id)) as sum FROM `project` JOIN student ON student.pnr in(");
 		int counter = 0;
 		for(String s : members) {
 			s = s.replaceAll("\\s+","");
@@ -52,7 +52,7 @@ public class StudentDao {
 			if(counter < members.size())
 				sb.append(',');
 		}
-		String cmd = sb.append(")").toString();
+		String cmd = sb.append(") and student.project_id = project.project_id").toString();
 		System.out.println(cmd);
 		Object x[] = {};
 		RowMapper<Integer> rw = new getProjectSum();

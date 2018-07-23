@@ -85,8 +85,8 @@
   </form>
 
 
-   <table style="width:100%" border ="1">
-   
+<div id="studentDetailTableDiv" style="visibility: hidden;">
+   <table style="width:100%" border ="1">   
   <caption><b><h3>Student Details<h3><b></caption>
   <tr>
     <th>PRN</th>
@@ -127,10 +127,9 @@
   	</td>
   	
   </tr>
- ${i}
   </c:forEach>
 </table>
-  
+  </div>
    <table style="width:100%" border ="1">
   <caption><b><h3>Faculty Details<h3><b></caption>
   <tr>
@@ -164,15 +163,12 @@
   	</form></th>
   
   </tr>
-  ${k}
   </c:forEach>  
-	
-	</table>
+</table>
 <br>
 <br>
- <h3>Update Student<h3>
-    <div>
-    
+    <div style="visibility: hidden;" id="updateStudentDiv">
+     <h3>Update Student</h3>
      PRN         <input type="text" id="pnr" value="${studentObject.pnr}"><br>
     Name       <input type="text" id="name" value="${studentObject.fname}"><br>
     Email-Id   <input type="text" id="email" value="${studentObject.email}"><br>
@@ -182,8 +178,8 @@
     <br><button id="upbtn">Update</button>
   </div>
   <br>
-  <h3>Update Faculty<h3>
-   <div>
+   <div style="visibility: hidden;" id="updateFacultyDiv">
+  	<h3>Update Faculty</h3>
    <form action="" method="post">
     Email-Id   <input type="text" id="email" value="${facultyObject.email_id}"><br>
     Name        <input type="text" id="name" value="${facultyObject.name}"><br>
