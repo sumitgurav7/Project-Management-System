@@ -85,7 +85,7 @@
   </form>
 
 
-<div id="studentDetailTableDiv" style="visibility: hidden;">
+<div id="studentDetailTableDiv">
    <table style="width:100%" border ="1">   
   <caption><b><h3>Student Details<h3><b></caption>
   <tr>
@@ -167,7 +167,7 @@
 </table>
 <br>
 <br>
-    <div style="visibility: hidden;" id="updateStudentDiv">
+    <div id="updateStudentDiv">
      <h3>Update Student</h3>
      PRN         <input type="text" id="pnr" value="${studentObject.pnr}"><br>
     Name       <input type="text" id="name" value="${studentObject.fname}"><br>
@@ -178,7 +178,7 @@
     <br><button id="upbtn">Update</button>
   </div>
   <br>
-   <div style="visibility: hidden;" id="updateFacultyDiv">
+   <div id="updateFacultyDiv">
   	<h3>Update Faculty</h3>
    <form action="" method="post">
     Email-Id   <input type="text" id="email" value="${facultyObject.email_id}"><br>
