@@ -1,5 +1,8 @@
 package opms.project.loginreg;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -118,7 +121,7 @@ public class LoginPresentation {
 	
 	
 	@RequestMapping(value="/student_logins", method = RequestMethod.POST)
-	public ModelAndView studLogin(@RequestParam("username") String username, @RequestParam("password") String password)
+	public ModelAndView studLogin(@RequestParam("username") String username, @RequestParam("password") String password,HttpServletRequest httpServletRequest)
 	{
 		System.out.println("in student Login");
 		ModelAndView mv = new ModelAndView();
@@ -136,7 +139,9 @@ public class LoginPresentation {
 			
 			if(validate == true)
 			{
-				
+				HttpSession httpSession = httpServletRequest.getSession();
+				httpSession.setAttribute("username", username);
+				httpSession.setAttribute("password", password);
 				mv.setViewName("/student/student_welcome.jsp");
 			
 			}

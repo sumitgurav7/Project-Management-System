@@ -28,7 +28,7 @@
   padding-top: 0px;
   position: absolute;
   top: 350px;
-  left: 40%;
+  left: 43%;
   float=right;
   transform: translate(-30%, -50%);
   text-align: left;

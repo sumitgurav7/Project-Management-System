@@ -2,7 +2,11 @@ package opms.project.students;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.StringTokenizer;
 
 import javax.servlet.ServletException;
@@ -21,6 +25,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -135,4 +140,58 @@ public class StudentPresentation {
 		mv.setViewName("logout.jsp");
 		return mv;
 	}
+	
+	
+	@RequestMapping(value = "/studupload", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.POST)
+	public ModelAndView processUpload(HttpServletRequest httpServletRequest, @RequestParam("file") MultipartFile file,
+			ModelAndView modelAndView,@RequestParam("textline") String username) throws IOException {
+
+		System.out.println("Upload Called");
+
+		byte[] fileBytes = file.getBytes();
+
+		String UPLOADED_FOLDER = "C:\\Users\\gurav\\git\\online-project-management-system\\Online project Management System\\WebContent\\FileStorage\\";
+
+		System.out.println(file.getOriginalFilename());
+		Path path = Paths.get(UPLOADED_FOLDER + username+ file.getOriginalFilename());
+		Files.write(path, fileBytes);
+
+		final String fileContent = new String(fileBytes);
+
+		System.out.println("File Data : " + fileContent);
+
+		modelAndView.setViewName("student/viewStatus.jsp");
+
+		return modelAndView;
+	}
+	
+	
+	@RequestMapping(value="/statusreport", method=RequestMethod.POST)
+	public ModelAndView statusReport(@RequestParam("username") String username)
+	{
+		ModelAndView mv = new ModelAndView();
+		ProjectObject listOfReport = s.returnReport(username);
+		if(listOfReport != null)
+		{
+			if(listOfReport.getStatus() == 0)
+			{mv.addObject("statusre", "Project approval Pending");}
+			if(listOfReport.getStatus() == 1)
+			{mv.addObject("statusre", "Project approved");}
+			if(listOfReport.getStatus() == 2)
+			{mv.addObject("statusre", "Project dis-approved");}
+			else
+			{System.out.println("nothing");}
+			mv.addObject("report", listOfReport);
+			List<Student> studentList = s.returnMembers(listOfReport.getProjectId());
+			mv.addObject("members",studentList);
+		}
+		else
+		{mv.addObject("statusre", "No project For this User");}
+		
+		
+		
+		mv.setViewName("student/viewStatus.jsp");
+		return mv;
+	}
+	
 }

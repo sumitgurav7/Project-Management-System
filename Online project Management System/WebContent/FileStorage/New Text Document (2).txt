@@ -1,0 +1,13 @@
+http://localhost:9080/ItemInfoWeb/Main.1html
+
+
+http://localhost:9080/SpringJdbcWithWebItemInfo/index.jsp
+
+springJdbcWithWebStudentInfo
+http://localhost:9080/springJdbcWithWebStudentInfo/MainPage.jsp
+
+SpringWebBasedApp
+http://localhost:9080/SpringWebBasedApp/index.jsp
+
+StudentInfoWeb
+http://localhost:9080/StudentInfoWeb/MainPage.html

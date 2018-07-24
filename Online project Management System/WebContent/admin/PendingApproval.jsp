@@ -123,8 +123,8 @@
   overflow-x: hidden;
   padding-top: 0px;
   position: absolute;
-  top: 200px;
-  left: 40%;
+  top: 500px;
+  left: 43%;
   float=right;
   transform: translate(-30%, -50%);
   text-align: left;

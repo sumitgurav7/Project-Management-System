@@ -1,5 +1,7 @@
 package opms.project.students;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,5 +31,15 @@ public class StudentService {
 			}
 		} 
 		return result;
+	}
+
+	public ProjectObject returnReport(String username) {
+		// TODO Auto-generated method stub
+		return sd.returnReportDao(username);
+	}
+
+	public List<Student> returnMembers(int projectId) {
+		// TODO Auto-generated method stub
+		return sd.returnMembersDao(projectId);
 	}
 }

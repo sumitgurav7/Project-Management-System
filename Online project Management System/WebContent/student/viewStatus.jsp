@@ -2,6 +2,7 @@
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
+<%@ taglib prefix="c" uri="/WEB-INF/c.tld" %>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>view status</title>
@@ -28,8 +29,8 @@
   overflow-x: hidden;
   padding-top: 0px;
   position: absolute;
-  top: 150px;
-  left: 40%;
+  top: 250px;
+  left: 43%;
   float=right;
   transform: translate(-30%, -50%);
   text-align: left;
@@ -45,9 +46,9 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
-<body background="./images/background3.jpg">
+<body background="./images/background4.jpeg">
 <div class="splitleft">
-<h3>Welcome to</h3></br><h2>CDAC </br>Project Management System</h2>
+<h3>Welcome ${sessionScope.username}</h3></br><h2>CDAC </br>Project Management System</h2>
 </div>
 <div  class="splitcenter">
 		<div class="panel panel-primary">
@@ -60,9 +61,26 @@
 			</div>
 		</div>
 		<h3>Status Report</h3>
-Title         <input type="text" placeholder="Project Title" style="width:500px; height:40px;" />
+		<form action="statusreport" method="post">
+			<input type="hidden" name="username" value="${sessionScope.username}">
+			<input type="submit" value="View">
+			<h3>	${statusre}</h3>
+		</form>
+Title         <input type="text" value="${report.title}" style="width:500px; height:40px;" />
 
 
-      </br>Abstract   <input type="text" placeholder="Abstract" style="width: 500px; height: 80px"> 
+      </br>Abstract   <input type="text" value="${report.abs}" style="width: 500px; height: 80px"> 
+      <table>
+      <tr>
+      	<th>Name of Student </th>
+      	<th> PRN </th>
+      </tr>
+      <c:forEach items="${members}" var="member">
+      <tr>
+      	<td>${member.fname}</td>
+      	<td>${member.pnr}</td>
+      </tr>
+      </c:forEach>
+      </table>
 </body>
 </html>

@@ -29,7 +29,7 @@
   padding-top: 0px;
   position: absolute;
   top: 250px;
-  left: 40%;
+  left: 43%;
   float=right;
   transform: translate(-30%, -50%);
   text-align: left;
@@ -45,9 +45,9 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
-<body background="./images/background3.jpg">
+<body background="./images/background4.jpeg">
 <div class="splitleft">
-<h3>Welcome to</h3></br><h2>CDAC </br>Project Management System</h2>
+<h3>Welcome ${sessionScope.username}</h3></br><h2>CDAC </br>Project Management System</h2>
 </div>
 <div  class="splitcenter">
 		<div class="panel panel-primary">
@@ -61,16 +61,17 @@
 		</div>
     <h3>Upload Project Related File</h3>
     <br>
-    <form id = "uploadfile" method = "post" action = " ">
+    <form method="POST" action="${pageContext.request.contextPath}/studupload"
+			enctype="multipart/form-data">
     <p>Title
-    <input type="text" name="textline" size="30">
+    <input type="text" name="textline" value="${sessionScope.username}" size="30">
     </p>
     <p>
     Please specify a file, or a set of files:<br><br>
-      <input id = "fileupload" type = "file" />
+      <input id = "fileupload" name="file" type = "file" />
      </p>
      <div>
-      <input type = "submit" value = "submit" id = "submit" />
+      <input type = "submit" value = "Upload" id = "submit" />
       </div>
 </form>
 
