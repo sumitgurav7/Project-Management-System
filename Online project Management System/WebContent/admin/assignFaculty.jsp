@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>New Project Entry</title>
+<title>Assign Supervisor</title>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -95,7 +95,7 @@
       <div class="panel-heading">
         <a href="pendingapp" class="links"><font color="white">Pending Approval   </font></a>
         <a href="viewmember" class="links"><font color="white">View Member  </font></a>
-        <a href="assignFaculty" class="links"><font color="white">Assign Faculty  </font></a>
+        <a href="assignFaculty" class="links"><font color="white">Assign Supervisor  </font></a>
         <a href="logout" class="links"><font color="white">Logout      </font></a>
       </div>
     </div>
@@ -106,8 +106,8 @@
     <th>Project Id</th>
     <th>Title  </th>
     <th>Lead PRN</th>
-    <th>Faculty</th>
-    <th>Assign Guide</th>
+    <th>Supervisor</th>
+    <th>Assign Supervisor</th>
   </tr>
   <c:forEach items="${pendingProjectList}" var = "j">
   <tr>

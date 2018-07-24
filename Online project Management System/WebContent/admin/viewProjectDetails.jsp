@@ -11,6 +11,18 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script type="text/javascript">
 	$(function(){
+	   $(".approveProject").click(function(event){
+	       event.preventDefault();
+	       var projectid = $(".projectId").val();
+	      handleProjectViaAjex(1, projectid);
+	   });
+	 	   
+	   $(".rejectProject").click(function(event){
+	       event.preventDefault();
+	       var projectid = $(".projectId").val();
+	      handleProjectViaAjex(2, projectid);
+		});
+	 	  
 		$(".removeStudent").click(function(event){
 			event.preventDefault();
 			 var ch_list=Array(); 
@@ -53,6 +65,37 @@
 */
 		});
 });
+	
+	function handleProjectViaAjex(){
+    	var data = {}
+    	data["projectId"] = arguments[1];
+    	data["valToPass"] = arguments[0];
+		alert("approve project called");
+    	$.ajax({
+			type : "POST",
+			contentType : "application/json",
+			url : "${pageContext.request.contextPath}/updateProject",
+			data : JSON.stringify(data),
+			dataType : 'json',
+			async : false,
+			timeout : 100000,
+			success : function(data) {
+				console.log("SUCCESS: ", data);
+				if(data == true){
+					alert("Action completed successfully");	
+				} else {
+					alert("Action did not complete successfully");
+				}
+			},
+			error : function(e) {
+				console.log("ERROR: ", e);
+				alert(e);
+			},
+			done : function(e) {
+				console.log("DONE");
+			}
+		});
+    }
 
 </script>
 
@@ -122,6 +165,7 @@
   </form>
   	</br>
   	<div style="text-align:center">
+  	<input type="hidden" class="projectId" value="${projectObject.projectId}"/>
     <input type="submit" class="approveProject" value="Approve">
   	<input type="submit" class="rejectProject" value="Reject">
 	</div>

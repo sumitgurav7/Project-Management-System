@@ -187,8 +187,8 @@
       </br>Abstract   <input type="text" id="abstract" placeholder="Abstract" style="width: 500px; height: 80px"> 
 
         </br>Team Leader   <input type="text" name="teamlead" id="teamlead" placeholder="PRN">  <button id="leadsearchbutton">search</button>  <input type="text" id="leadfinalname" readonly >
-        </br>Team Members  <input type="text" id="member" placeholder="PRN">  <button id="membersearchbutton">search</button>  <input id="singlemember" type="text" readonly >  <button id="selectmember">select</button>  <span id="allmember" style="height: 70px;"></span>
-      <button id="formsubmit">submit</button>
+        </br>Team Members  <input type="text" id="member" placeholder="PRN">  <button id="membersearchbutton">search</button>  <input id="singlemember" type="text" readonly >  <button id="selectmember">+ Add</button>  <span id="allmember" style="height: 70px;"></span>
+      <button id="formsubmit">Create Project</button>
       </form>
     </div> 
 </div>
