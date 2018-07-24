@@ -2,6 +2,7 @@
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
+<%@ taglib prefix="c" uri="/WEB-INF/c.tld" %>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>file upload</title>
@@ -80,12 +81,21 @@
 <table style="width:100%" border ="1">
   <caption><b><h3>uploaded files<h3><b></caption>
   <tr>
-    <th>Serial No</th>
+    <th>Project Id</th>
     <th>File Name</th>
     <th>Download</th>
     
   </tr>
   
+  <c:forEach items="fileview" var="fl">
+  <tr>
+  	<td>	${fl.project_id} </td>
+  	<td>	${fl.filename} </td>
+  	<td>	${fl.filename} </td>
+  
+  
+  </tr>
+  </c:forEach>
 </table>
 </div>
 </div>

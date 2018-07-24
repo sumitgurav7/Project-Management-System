@@ -3,6 +3,7 @@ package opms.project.students;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
@@ -17,7 +18,9 @@ import org.springframework.stereotype.Repository;
 
 import com.mysql.jdbc.Statement;
 
+import opms.project.admin.getProjectDataAdmin;
 import opms.project.admin.getStudentDataAdmin;
+import opms.project.files.file;
 import opms.project.project.ProjectObject;
 
 
@@ -145,6 +148,63 @@ public class StudentDao {
 		return null;
 		
 		
+	}
+
+	public boolean sqlUploadsDao(String uPLOADED_FOLDER, String fileName, String username) {
+		// TODO Auto-generated method stub
+		
+		Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+		String cmad = "select project_id from student where pnr =?";
+		Object valuesFill[] = {username};
+		RowMapper<Integer> romap = new getUploadStudDataAdmin();
+		List<Integer> project = t.query(cmad, valuesFill, romap);
+		int project_id=project.get(0);
+		
+		String command = "INSERT INTO `files`(`filename`, `filepath`, `filehash`, `timestamp`, `project_id`, `uploaded_by`) VALUES (?,?,?,?,?,?)";
+		Object valuesToFill[] = {fileName,uPLOADED_FOLDER,0,timestamp.getTime(),project_id,username};
+		int rows= t.update(command, valuesToFill);
+		if(rows>0)
+		{
+			return true;
+		}
+		
+		return false;
+	}
+
+	public List<file> getListOfFiles(String username) {
+		// TODO Auto-generated method stub
+		
+		List<file> files = null;
+		
+		String cmad = "select project_id from student where pnr =?";
+		Object valuesFill[] = {username};
+		RowMapper<Integer> romap = new getUploadStudDataAdmin();
+		List<Integer> project = t.query(cmad, valuesFill, romap);
+		int project_id=project.get(0);
+		
+		String cmd = "SELECT * FROM `project` WHERE `project_id` = ?";
+		Object valuesFillFac[] = {project_id};
+		RowMapper<ProjectObject> romapfac = new getProjectDataAdmin();
+		List<ProjectObject> projFac = t.query(cmd, valuesFillFac, romapfac);
+		String project_guide=projFac.get(0).getGuide();
+				
+			
+				
+				
+		String cmand = "SELECT `filename`, `filepath`, `filehash`, `timestamp`, `project_id`, `uploaded_by` FROM `files` WHERE uploaded_by = ? or uploaded_by = ?";
+		Object valuesFileFill[] = {username,project_guide};
+		RowMapper<file> romapFile = new getRetriveFile();
+		files = t.query(cmand, valuesFileFill, romapFile);
+		System.out.println("file name is");
+		System.out.println(files.get(0).getFilename());
+		if(files.size()>0)
+		{
+			return files;
+		}
+		
+		
+		
+		return null;
 	}
 
 }

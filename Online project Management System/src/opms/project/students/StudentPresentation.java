@@ -30,6 +30,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import opms.project.files.file;
 import opms.project.project.*;
 
 @Controller
@@ -151,11 +152,26 @@ public class StudentPresentation {
 		byte[] fileBytes = file.getBytes();
 
 		String UPLOADED_FOLDER = "C:\\Users\\gurav\\git\\online-project-management-system\\Online project Management System\\WebContent\\FileStorage\\";
-
-		System.out.println(file.getOriginalFilename());
-		Path path = Paths.get(UPLOADED_FOLDER + username+ file.getOriginalFilename());
-		Files.write(path, fileBytes);
-
+		String fileName=file.getOriginalFilename();
+		boolean sqlUploadStat = false;
+		sqlUploadStat = s.sqlUploads(UPLOADED_FOLDER,fileName,username);
+		
+		
+		if(sqlUploadStat == false)
+		{
+			modelAndView.addObject("projectUploadStat","project upload unsuccessfull");
+		}
+		else
+		{
+			
+			System.out.println(file.getOriginalFilename());
+			Path path = Paths.get(UPLOADED_FOLDER + username+ file.getOriginalFilename());
+			Files.write(path, fileBytes);
+			List<file> listOfFile = s.getListOfFiles(username);
+			modelAndView.addObject("fileview", listOfFile);
+			modelAndView.addObject("projectUploadStat","project upload successfull");
+			
+		}
 		final String fileContent = new String(fileBytes);
 
 		System.out.println("File Data : " + fileContent);

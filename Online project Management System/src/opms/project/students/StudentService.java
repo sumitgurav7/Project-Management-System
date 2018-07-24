@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import opms.project.files.file;
 import opms.project.project.ProjectObject;
 
 @Service
@@ -41,5 +42,18 @@ public class StudentService {
 	public List<Student> returnMembers(int projectId) {
 		// TODO Auto-generated method stub
 		return sd.returnMembersDao(projectId);
+	}
+
+	public boolean sqlUploads(String uPLOADED_FOLDER, String fileName, String username) {
+		// TODO Auto-generated method stub
+		return sd.sqlUploadsDao(uPLOADED_FOLDER, fileName, username);
+	}
+
+	public List<file> getListOfFiles(String username) {
+		// TODO Auto-generated method stub
+		
+		
+		
+		return sd.getListOfFiles(username);
 	}
 }
