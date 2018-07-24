@@ -152,6 +152,7 @@ public class StudentPresentation {
 		byte[] fileBytes = file.getBytes();
 
 		String UPLOADED_FOLDER = "C:\\Users\\gurav\\git\\online-project-management-system\\Online project Management System\\WebContent\\FileStorage\\";
+
 		String fileName=file.getOriginalFilename();
 		boolean sqlUploadStat = false;
 		sqlUploadStat = s.sqlUploads(UPLOADED_FOLDER,fileName,username);
@@ -172,11 +173,13 @@ public class StudentPresentation {
 			modelAndView.addObject("projectUploadStat","project upload successfull");
 			
 		}
+
 		final String fileContent = new String(fileBytes);
 
 		System.out.println("File Data : " + fileContent);
+		modelAndView.addObject("uploadstatus","Upload Successfull");
 
-		modelAndView.setViewName("student/viewStatus.jsp");
+		modelAndView.setViewName("student/FileUpload.jsp");
 
 		return modelAndView;
 	}

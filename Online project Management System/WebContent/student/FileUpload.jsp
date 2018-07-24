@@ -75,7 +75,7 @@
       <input type = "submit" value = "Upload" id = "submit" />
       </div>
 </form>
-
+	<h3>${uploadstatus}</h3>
 <h3>Download files here</h3>
 <div>
 <table style="width:100%" border ="1">
