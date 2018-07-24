@@ -21,33 +21,21 @@ public class AdminService {
 		this.ad = ad;
 	}
 
-
-
-
 	public List<Student> getAllStudents() {
 		// TODO Auto-generated method stub
 		
 		return ad.getAllStudentsDao();
 	}
 
-
-
-
 	public List<Faculty> getAllFaculty() {
 		// TODO Auto-generated method stub
 		return ad.getAllFacultyDao();
 	}
 
-
-
-
 	public List<Faculty> delFaculty(String fac) {
 		// TODO Auto-generated method stub
 		return ad.delFacultyDao(fac);
 	}
-
-
-
 
 	public List<Student> delStudent(String pnr) {
 		// TODO Auto-generated method stub
@@ -70,15 +58,9 @@ public class AdminService {
 		return ad.updateProject(projectId, value);
 	}
 
-
-
-
 	public List<ProjectObject> getGuidePendingProjects() {
 		return ad.getGuidePendingProjects();
 	}
-
-
-
 
 	public List<Faculty> getAllFacultyList() {
 		return ad.getAllFacultyList();
@@ -88,17 +70,15 @@ public class AdminService {
 		return ad.assignFacultyToProject(projectId, facultyMailId);
 	}
 
-
-
-
 	public ProjectObject getProjectById(int project_id) {
 		return ad.getProjectDetailsById(project_id);
 	}
 
-
-
-
 	public List<Student> getAllStudentsByProjectId(int project_id) {
 		return ad.getAllStudentsByProjectId(project_id);
+	}
+
+	public boolean removeStudentsFromProject(ArrayList<String> studentList) {
+		return ad.removeStudentsFromProject(studentList);
 	}
 }

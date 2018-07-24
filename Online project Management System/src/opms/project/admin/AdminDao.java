@@ -178,7 +178,31 @@ public class AdminDao {
 	}
 
 	public List<Student> getAllStudentsByProjectId(int project_id) {
-		// TODO Auto-generated method stub
-		return null;
+		List<Student> list = null;
+		String cmd = "select * from student where project_id = ?";
+		Object fillValue[] = {project_id};
+		RowMapper<Student> rw = new getStudentDataAdmin();
+		list = t.query(cmd, fillValue, rw);
+		return list;
 	}
+
+	public boolean removeStudentsFromProject(ArrayList<String> studentList) {
+		StringBuilder sb = new StringBuilder("Update student set project_id=0 where pnr in (");
+		int counter = 0;
+		for(String s : studentList) {
+			s = s.replaceAll("\\s+","");
+			sb.append('"'+ s + '"');
+			counter++;
+			if(counter < studentList.size())
+				sb.append(',');
+		}
+		String cmd = sb.append(")").toString();
+		System.out.println(cmd);
+		int row = t.update(cmd);
+		if(row <= 0) {
+			return false;
+		}
+		return true;
+	}
+
 }

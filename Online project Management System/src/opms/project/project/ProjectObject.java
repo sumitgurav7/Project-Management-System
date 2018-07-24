@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 public class ProjectObject {
 	int    projectId;
-	
 	String title;
 	String abs;
 	String guide;
@@ -12,7 +11,6 @@ public class ProjectObject {
 	String start_date;
 	String end_date;
 	int status;
-	
 	ArrayList<String> members;
 	
 	public ProjectObject() {

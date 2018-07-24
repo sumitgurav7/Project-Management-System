@@ -248,8 +248,41 @@ public class AdminPresentation {
 		ProjectObject p = s.getProjectById(project_id);
 		mv.addObject("projectObject", p);
 		List<Student> list = s.getAllStudentsByProjectId(project_id);
+		if(list == null) {
+			list = new ArrayList<Student>();
+		}
 		mv.addObject("studentList",list);
 		mv.setViewName("admin/viewProjectDetails.jsp");
 		return mv;
+	}
+	
+	@RequestMapping(value="/removeStudentsFromProject",method=RequestMethod.POST, 
+            produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+	@ResponseBody
+	public boolean removeStudentsFromProject(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		StringBuilder sb = new StringBuilder();
+	    BufferedReader reader = request.getReader();
+	    ArrayList<String> studentList = new ArrayList<String>();
+	    try {
+	        String line;
+	        while ((line = reader.readLine()) != null) {
+	            sb.append(line).append('\n');
+	        }
+	    } finally {
+	        reader.close();
+	    }
+	    String str = sb.toString();
+	    try {
+			JSONObject json = new JSONObject(str);
+			JSONArray ja = json.getJSONArray("listOfStudents");
+			for(int i =0; i < ja.length(); i++) {
+				studentList.add(ja.getString(i));
+			}
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+	    boolean result = s.removeStudentsFromProject(studentList);
+		return result;
 	}
 }
