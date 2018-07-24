@@ -165,4 +165,20 @@ public class AdminDao {
 		}
 		return true;
 	}
+
+	public ProjectObject getProjectDetailsById(int project_id) {
+		String cmd = "select * from project where project_id = ?";
+		Object[] x = {project_id};
+		RowMapper<ProjectObject> rw = new getProjectDataAdmin();
+		List<ProjectObject> list = t.query(cmd, x, rw);
+		if(list.size() > 0)
+			return list.get(0);
+		else
+			return null;
+	}
+
+	public List<Student> getAllStudentsByProjectId(int project_id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

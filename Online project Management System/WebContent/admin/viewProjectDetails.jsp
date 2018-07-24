@@ -10,24 +10,7 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script type="text/javascript">
-	$(function(){
-/*		$(".viewProjectDetails").click(function(event){
-			event.preventDefault();
-			var projectid = $(this).parent().siblings("td:eq(0)").text();
-			viewProjectViaAjex(projectid);
-		});
- 	   $(".approvelogin").click(function(event){
- 	       event.preventDefault();
- 	       var username = $(this).parent().siblings("td:eq(0)").text();
- 	       handleLoginViaAjex(1, username);
-    	});
- 	   
- 	  $(".rejectLogin").click(function(event){
-	       event.preventDefault();
-	       var username = $(this).parent().siblings("td:eq(0)").text();
-	       handleLoginViaAjex(2, username);
-   		});
-	  
+/*	$(function(){
  	   $(".approveProject").click(function(event){
  	       event.preventDefault();
  	       var projectid = $(this).parent().siblings("td:eq(0)").text();
@@ -39,17 +22,17 @@
 	       var projectid = $(this).parent().siblings("td:eq(0)").text();
 	      handleProjectViaAjex(2, projectid);
 	   });
- 	  */
 	});
 	
-/* 	function handleLoginViaAjex(){
+	function handleProjectViaAjex(){
     	var data = {}
-    	data["username"] = arguments[1];
+    	data["projectId"] = arguments[1];
     	data["valToPass"] = arguments[0];
+		alert("approve project called");
     	$.ajax({
 			type : "POST",
 			contentType : "application/json",
-			url : "${pageContext.request.contextPath}/updateLogin",
+			url : "${pageContext.request.contextPath}/updateProject",
 			data : JSON.stringify(data),
 			dataType : 'json',
 			async : false,
@@ -70,34 +53,8 @@
 				console.log("DONE");
 			}
 		});
-    } */
-	
-	function viewProjectViaAjex(){
-    	var data = {}
-    	data["projectId"] = arguments[0];
-    	var link = '@Url.Action("ActionMethod", "View Project Details")';
-		alert("view project called");
-    	$.ajax({
-			type : "POST",
-			contentType : "application/json",
-			url : "${pageContext.request.contextPath}/viewProjectDetail",
-			data : JSON.stringify(data),
-			dataType : 'json',
-			async : false,
-			timeout : 100000,
-			success : function(data) {
-				//console.log("SUCCESS: ", data);
-			},
-			error : function(e) {
-				console.log("ERROR: ", e);
-				alert(e);
-			},
-			done : function(e) {
-				console.log("DONE");
-			}
-		});
     }
-
+*/
 </script>
 
 <style type="text/css">
@@ -151,53 +108,15 @@
         <a href="logout" class="links"><font color="white">Logout      </font></a>
       </div>
     </div>
-<!--     
-   <table style="width:100%" border ="1">
-  <caption><b><h3>Pending Login	<h3><b></caption>
-  <tr>
-    <th>Username</th>
-    <th>Valid From</th>
-    <th>Valid Upto</th>
-    <th>Approve</th>
-    <th>Reject</th>
-  </tr>
-  <c:forEach items="${pendingLoginList}" var = "i">
-  <tr>
-  	<td>${i.username}</td>
-  	<td>${i.valid_from}</td>
-  	<td>${i.valid_upto}</td>
-  	<td>
-  		<input type="submit" class="approvelogin" value="Approve">
-  	</td>
-  	<td>
-  	<input type="submit" class="rejectLogin" value="Reject">
-  	</td>
-  	
-  </tr>
+
+<div>Title: ${projectObject.title}</div>
+<div>Abstract: ${projectObject.abs}</div>
+
+  <c:forEach items="${studentList}" var = "j">
+  	</br>${j.fname}
+  	<input type="submit" class="approveProject" value="Approve">
+  	<input type="submit" class="rejectProject" value="Reject">
   </c:forEach>  
-</table>
--->
-<table style="width:100%" border ="1">
-  <caption><b><h3>Pending Project<h3><b></caption>
-  <tr>
-  	<th>Id</th>
-    <th>Title  </th>
-    <th>View Details</th>
-  </tr>
-  <c:forEach items="${pendingProjectList}" var = "j">
-  <tr>
-  
-  	<td>${j.projectId}</td>
-  	<td>${j.title}</td>
-  	<td>
-  	<form action="viewProjectDetail" method="post" >
-  	<input style="width:100%" type="hidden" name="project_id" id="project_id" value="${j.projectId}" />
-  	<input type="submit" value="View Details">
-  	</form>
-  	</td>
-  </tr>
-  </c:forEach>  
-</table>
 
 </div>
 </body>

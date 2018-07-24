@@ -2,7 +2,7 @@ package opms.project.students;
 
 public class Student {
 	String fname;
-	String pnr;
+	String prn;
 	String email;
 	String deptartment;
 	String contact_no;
@@ -14,10 +14,10 @@ public class Student {
 		this.fname = fname;
 	}
 	public String getPnr() {
-		return pnr;
+		return prn;
 	}
 	public void setPnr(String pnr) {
-		this.pnr = pnr;
+		this.prn = pnr;
 	}
 	public String getEmail() {
 		return email;
@@ -46,7 +46,7 @@ public class Student {
 	public Student(String fname, String pnr, String email, String deptartment, String contact_no, long projectId) {
 		super();
 		this.fname = fname;
-		this.pnr = pnr;
+		this.prn = pnr;
 		this.email = email;
 		this.deptartment = deptartment;
 		this.contact_no = contact_no;

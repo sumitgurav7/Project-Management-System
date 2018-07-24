@@ -87,4 +87,18 @@ public class AdminService {
 	public boolean assignFacultyToProject(String projectId, String facultyMailId) {
 		return ad.assignFacultyToProject(projectId, facultyMailId);
 	}
+
+
+
+
+	public ProjectObject getProjectById(int project_id) {
+		return ad.getProjectDetailsById(project_id);
+	}
+
+
+
+
+	public List<Student> getAllStudentsByProjectId(int project_id) {
+		return ad.getAllStudentsByProjectId(project_id);
+	}
 }

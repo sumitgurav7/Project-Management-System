@@ -239,4 +239,17 @@ public class AdminPresentation {
 	    return s.assignFacultyToProject(projectId, facultyMailId);
 	}
 	
+	@RequestMapping(value="/viewProjectDetail",method=RequestMethod.POST)
+	@ResponseBody
+	public ModelAndView viewProjectDetails(@RequestParam("project_id") int project_id)
+	{
+		System.out.println(project_id);
+		ModelAndView mv = new ModelAndView();
+		ProjectObject p = s.getProjectById(project_id);
+		mv.addObject("projectObject", p);
+		List<Student> list = s.getAllStudentsByProjectId(project_id);
+		mv.addObject("studentList",list);
+		mv.setViewName("admin/viewProjectDetails.jsp");
+		return mv;
+	}
 }

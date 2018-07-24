@@ -4,15 +4,7 @@ import java.util.ArrayList;
 
 public class ProjectObject {
 	int    projectId;
-	public int getProjectId() {
-		return projectId;
-	}
-
-
-
-	public void setProjectId(int projectId) {
-		this.projectId = projectId;
-	}
+	
 	String title;
 	String abs;
 	String guide;
@@ -27,7 +19,13 @@ public class ProjectObject {
 		
 	}
 	
-	
+	public int getProjectId() {
+		return projectId;
+	}
+
+	public void setProjectId(int projectId) {
+		this.projectId = projectId;
+	}	
 	
 	public ProjectObject(int projectId, String title, String abs, String guide, String lead, String start_date,
 			String end_date, int status) {
