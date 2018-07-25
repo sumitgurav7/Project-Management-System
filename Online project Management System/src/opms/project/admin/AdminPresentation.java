@@ -65,27 +65,32 @@ public class AdminPresentation {
 	public ModelAndView viewData(@RequestParam("memberby") String getallby, @RequestParam("searchby") String searchtype, @RequestParam("searchvalue") String searchValue)
 	{ 
 		ModelAndView mv = new ModelAndView();
-		System.out.println(searchValue + "1");
 		if(getallby!=null)
 		{
 			if(getallby.equals("student"))
 			{
-				List<Student> listOfObject = s.getAllStudents();
-				
-				if(listOfObject.size()>0)
-				{
-					mv.addObject("viewAllKey", listOfObject);
-					mv.setViewName("admin/ViewMember.jsp");
+				List<Student> listOfObject = new ArrayList<Student>();
+				if(searchtype.equals("all") || searchValue.length() == 0) {
+					listOfObject = s.getAllStudents();
+				} else {
+					listOfObject = s.getStudentByCondition(searchtype, searchValue);
 				}
+				
+				mv.addObject("viewAllKey", listOfObject);
+				mv.setViewName("admin/ViewMember.jsp");
 			}
 			if(getallby.equals("faculty"))
-			{
-				List<Faculty> listOfObject =s.getAllFaculty();
+			{	
+				List<Faculty> listOfObject = new ArrayList<Faculty>();
+				if(searchtype.equals("all") || searchValue.length() == 0) {
+					listOfObject =s.getAllFaculty();
+				} else {
+					listOfObject = s.getFacultyByCondition(searchtype, searchValue);
+				}
 				mv.addObject("viewAllKeyFaculty", listOfObject);
 				mv.setViewName("admin/ViewMember.jsp");
 			}
 		}
-		
 		return mv;
 		
 	}
@@ -284,5 +289,108 @@ public class AdminPresentation {
 		}
 	    boolean result = s.removeStudentsFromProject(studentList);
 		return result;
+	}
+	
+	@RequestMapping(value="/deleteProcess",method=RequestMethod.POST, 
+            produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+	@ResponseBody
+	public boolean deleteStudent(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		StringBuilder sb = new StringBuilder();
+	    BufferedReader reader = request.getReader();
+	    String id = null;
+	    int type = 0;
+	    try {
+	        String line;
+	        while ((line = reader.readLine()) != null) {
+	            sb.append(line).append('\n');
+	        }
+	    } finally {
+	        reader.close();
+	    }
+	    String str = sb.toString();
+	    try {
+			JSONObject json = new JSONObject(str);
+			id = json.getString("id");
+			type = json.getInt("membertype");
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+	    if(type == 1) {
+	    	return s.deleteStudent(id);
+	    } else if(type == 2) {
+	    	return s.deleteFaculty(id);
+	    }
+	    return false;
+	}
+	
+	@RequestMapping(value="/updateStudent",method=RequestMethod.POST, 
+            produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+	@ResponseBody
+	public boolean updateStudent(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		StringBuilder sb = new StringBuilder();
+	    BufferedReader reader = request.getReader();
+	    String prn = null;
+	    String name = null;
+	    String dept = null;
+	    String phn = null;
+	    int pid = 0;
+	    try {
+	        String line;
+	        while ((line = reader.readLine()) != null) {
+	            sb.append(line).append('\n');
+	        }
+	    } finally {
+	        reader.close();
+	    }
+	    String str = sb.toString();
+	    try {
+			JSONObject json = new JSONObject(str);
+			prn = json.getString("prn");
+			name = json.getString("name");
+			dept = json.getString("dept");
+			phn = json.getString("phn");
+			pid = json.getInt("pid");
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+	    
+	    return s.updateStudent(prn, name, dept, phn, pid);
+	}
+	
+	@RequestMapping(value="/updateFaculty",method=RequestMethod.POST, 
+            produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+	@ResponseBody
+	public boolean updateFaculty(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		StringBuilder sb = new StringBuilder();
+	    BufferedReader reader = request.getReader();
+	    String email = null;
+	    String name = null;
+	    String dept = null;
+	    String phn = null;
+	    String desig = null;
+	    try {
+	        String line;
+	        while ((line = reader.readLine()) != null) {
+	            sb.append(line).append('\n');
+	        }
+	    } finally {
+	        reader.close();
+	    }
+	    String str = sb.toString();
+	    try {
+			JSONObject json = new JSONObject(str);
+			email = json.getString("email");
+			name = json.getString("name");
+			dept = json.getString("dept");
+			phn = json.getString("phn");
+			desig = json.getString("design");
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+	    
+	    return s.updateFaculty(email, name, dept, phn, desig);
 	}
 }

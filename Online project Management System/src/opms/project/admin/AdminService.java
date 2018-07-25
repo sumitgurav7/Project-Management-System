@@ -81,4 +81,28 @@ public class AdminService {
 	public boolean removeStudentsFromProject(ArrayList<String> studentList) {
 		return ad.removeStudentsFromProject(studentList);
 	}
+
+	public boolean deleteStudent(String prn) {
+		return ad.deleteStudent(prn);
+	}
+
+	public boolean deleteFaculty(String id) {
+		return ad.deleteFaculty(id);
+	}
+
+	public boolean updateStudent(String prn, String name, String dept, String phn, int pid) {
+		return ad.updateStudent(prn, name, dept, phn, pid);
+	}
+
+	public boolean updateFaculty(String email, String name, String dept, String phn, String desig) {
+		return ad.updateFaculty(email, name, dept, phn, desig);
+	}
+
+	public List<Student> getStudentByCondition(String searchtype, String searchValue) {
+		return ad.getStudentByCondition(searchtype, searchValue);
+	}
+	
+	public List<Faculty> getFacultyByCondition(String searchtype, String searchValue) {
+		return ad.getFacultyByCondition(searchtype, searchValue);
+	}
 }
