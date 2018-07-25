@@ -1,7 +1,11 @@
 package opms.project.students;
 
+import java.io.BufferedInputStream;
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -21,6 +25,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -148,9 +153,12 @@ public class StudentPresentation {
 	}
 	
 	@RequestMapping("/logout")
-	public ModelAndView lout()
+	public ModelAndView lout(HttpServletRequest request)
 	{
 		ModelAndView mv = new ModelAndView();
+		
+		HttpSession session = request.getSession();
+		session.invalidate();
 		mv.setViewName("logout.jsp");
 		return mv;
 	}
@@ -168,7 +176,7 @@ public class StudentPresentation {
 		System.out.println("if file is notnull");
 		System.out.println(file!=null);
 		System.out.println(file.getOriginalFilename());
-		String fileName=file.getOriginalFilename();
+		String fileName=username + "_" +file.getOriginalFilename();
 		boolean sqlUploadStat = false;
 		
 		if(file.getOriginalFilename().equals(""))
@@ -186,7 +194,7 @@ public class StudentPresentation {
 		{
 			
 			System.out.println(file.getOriginalFilename());
-			Path path = Paths.get(UPLOADED_FOLDER + username+ file.getOriginalFilename());
+			Path path = Paths.get(UPLOADED_FOLDER + username+ "_"+ file.getOriginalFilename());
 			Files.write(path, fileBytes);
 			List<file> listOfFile = s.getListOfFiles(username);
 			System.out.println("size of list file in presentation " + listOfFile.size());
@@ -234,5 +242,44 @@ public class StudentPresentation {
 		mv.setViewName("student/viewStatus.jsp");
 		return mv;
 	}
+	
+	
+	
+	
+	@RequestMapping(value = "/downloadFile", method = RequestMethod.POST)
+	public void downlodFile(HttpServletResponse httpServletResponse,@RequestParam("upload_id") String upload_id) throws IOException {
+		
+		file fileObject = s.getDownloadFile(upload_id);
+		
+		String UPLOADED_FOLDER = fileObject.getFilepath();
+		String fileName = fileObject.getFilename();
+
+		File file = new File(UPLOADED_FOLDER + fileName);
+
+		httpServletResponse.setHeader("Content-Disposition",
+				String.format("inline; filename=\"" + file.getName() + "\""));
+
+		/*
+		 * "Content-Disposition : attachment" will be directly download, may provide
+		 * save as popup, based on your browser setting
+		 */
+		// response.setHeader("Content-Disposition", String.format("attachment;
+		// filename=\"%s\"", file.getName()));
+
+		String mimeType = "application/octet-stream";
+
+		httpServletResponse.setContentType(mimeType);
+
+		httpServletResponse.setContentLength((int) file.length());
+
+		InputStream inputStream = new BufferedInputStream(new FileInputStream(file));
+
+		// Copy bytes from source to destination(outputstream in this example), closes
+		// both streams.
+		FileCopyUtils.copy(inputStream, httpServletResponse.getOutputStream());
+	}
+	
+	
+	
 	
 }

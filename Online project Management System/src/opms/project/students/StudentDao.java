@@ -199,7 +199,7 @@ public class StudentDao {
 		}	
 				
 				
-		String cmand = "SELECT `filename`, `filepath`, `filehash`, `timestamp`, `project_id`, `uploaded_by` FROM `files` WHERE uploaded_by = ? or uploaded_by = ?";
+		String cmand = "SELECT `upload_id`, `filename`, `filepath`, `filehash`, `timestamp`, `project_id`, `uploaded_by` FROM `files` WHERE uploaded_by = ? or uploaded_by = ?";
 		Object valuesFileFill[] = {username,project_guide};
 		RowMapper<file> romapFile = new getRetriveFile();
 		files = t.query(cmand, valuesFileFill, romapFile);
@@ -215,6 +215,33 @@ public class StudentDao {
 		
 		
 		return null;
+	}
+
+	
+	
+	public file getDownloadFileDao(String upload_id) {
+		// TODO Auto-generated method stub
+		
+		List<file> files = null;
+		
+		String cmand = "SELECT `upload_id`, `filename`, `filepath`, `filehash`, `timestamp`, `project_id`, `uploaded_by` FROM `files` WHERE upload_id = ? ";
+		Object valuesFileFill[] = {upload_id};
+		RowMapper<file> romapFile = new getRetriveFile();
+		files = t.query(cmand, valuesFileFill, romapFile);
+		System.out.println("file name is in dao");
+		if(files.isEmpty())
+		{System.out.println("files are not available");}
+		else {System.out.println(files.get(0).getFilename());}
+		if(files.size()>0)
+		{
+			return files.get(0);
+		}
+		
+		
+		
+		return null;
+		
+	
 	}
 
 }

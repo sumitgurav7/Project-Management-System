@@ -156,7 +156,7 @@ public class LoginPresentation {
 	}
 	
 	@RequestMapping(value="/faculty_login", method = RequestMethod.POST)
-	public ModelAndView faculLogin(@RequestParam("username") String username, @RequestParam("password") String password)
+	public ModelAndView faculLogin(@RequestParam("username") String username,HttpServletRequest httpServletRequest, @RequestParam("password") String password)
 	{
 		System.out.println("in faculty Login");
 		ModelAndView mv = new ModelAndView();
@@ -175,6 +175,10 @@ public class LoginPresentation {
 			if(validate == true)
 			{
 				
+				HttpSession httpSession = httpServletRequest.getSession();
+				httpSession.setAttribute("username", username);
+				httpSession.setAttribute("password", password);
+				
 				mv.setViewName("/faculty/faculty_welcome.jsp");
 			
 			}
@@ -189,7 +193,7 @@ public class LoginPresentation {
 	}
 	
 	@RequestMapping(value="/admin_login", method = RequestMethod.POST)
-	public ModelAndView adminLogin(@RequestParam("username") String username, @RequestParam("password") String password)
+	public ModelAndView adminLogin(@RequestParam("username") String username,HttpServletRequest httpServletRequest, @RequestParam("password") String password)
 	{
 		System.out.println("in admin Login");
 		ModelAndView mv = new ModelAndView();
@@ -207,8 +211,11 @@ public class LoginPresentation {
 			
 			if(validate == true)
 			{
-				
+				HttpSession httpSession = httpServletRequest.getSession();
+				httpSession.setAttribute("username", username);
+				httpSession.setAttribute("password", password);
 				mv.setViewName("/admin/admin_welcome.jsp");
+				
 			
 			}
 			else

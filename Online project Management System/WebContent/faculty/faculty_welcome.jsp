@@ -52,8 +52,8 @@
 <div  class="splitcenter">
     <div class="panel panel-primary">
       <div class="panel-heading">
-        <a href="faculty/Projects.jsp" class="links"><font color="white">Projects   </font></a>
-        <a href="../logout.jsp" class="links"><font color="white">Logout      </font></a>
+        <a href="Projects" class="links"><font color="white">Projects   </font></a>
+        <a href="logout" class="links"><font color="white">Logout      </font></a>
       </div>
     </div>
 </div>

@@ -81,6 +81,7 @@
 <table style="width:100%" border ="1">
   <caption><b><h3>uploaded files<h3><b></caption>
   <tr>
+  	<th>File Upload</th>
     <th>Project Id</th>
     <th>File Name</th>
     <th>Uploaded By</th>
@@ -90,11 +91,18 @@
   
   <c:forEach items="${fileview}" var="fl">
   <tr>
+  	
+  	<td> 	${fl.upload_id}</td>
   	<td>	${fl.project_id} </td>
   	<td>	${fl.filename} </td>
   	<td>	${fl.uploaded_by} </td>
   	<td>	${fl.filename} </td>
-  
+  	<td><form action="${pageContext.request.contextPath}/downloadFile" method="post">
+  	
+  		<input type="hidden" name="upload_id" value="${fl.upload_id }">
+  		<input type="submit" value="Download">
+  	 
+  	</form> </td>
   
   </tr>
   </c:forEach>

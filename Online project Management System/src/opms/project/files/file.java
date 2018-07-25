@@ -2,7 +2,7 @@ package opms.project.files;
 
 public class file {
 	
-	
+	private String upload_id;
 	private String filename;
 	private String filepath;
 	private String filehash;
@@ -47,9 +47,10 @@ public class file {
 	public void setUploaded_by(String uploaded_by) {
 		this.uploaded_by = uploaded_by;
 	}
-	public file(String filename, String filepath, String filehash, String timestamp, String project_id,
+	public file(String upload_id, String filename, String filepath, String filehash, String timestamp, String project_id,
 			String uploaded_by) {
 		super();
+		this.upload_id = upload_id;
 		this.filename = filename;
 		this.filepath = filepath;
 		this.filehash = filehash;
@@ -58,6 +59,12 @@ public class file {
 		this.uploaded_by = uploaded_by;
 	}
 	
+	public String getUpload_id() {
+		return upload_id;
+	}
+	public void setUpload_id(String upload_id) {
+		this.upload_id = upload_id;
+	}
 	public file() {
 		// TODO Auto-generated constructor stub
 	}

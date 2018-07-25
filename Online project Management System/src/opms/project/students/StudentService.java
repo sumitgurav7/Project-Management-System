@@ -56,4 +56,11 @@ public class StudentService {
 		
 		return sd.getListOfFiles(username);
 	}
+
+	public file getDownloadFile(String upload_id) {
+		// TODO Auto-generated method stub
+		
+		
+		return sd.getDownloadFileDao(upload_id);
+	}
 }
