@@ -161,7 +161,7 @@ public class StudentDao {
 		int project_id=project.get(0);
 		
 		String command = "INSERT INTO `files`(`filename`, `filepath`, `filehash`, `timestamp`, `project_id`, `uploaded_by`) VALUES (?,?,?,?,?,?)";
-		Object valuesToFill[] = {fileName,uPLOADED_FOLDER,0,timestamp.getTime(),project_id,username};
+		Object valuesToFill[] = {fileName,uPLOADED_FOLDER,0,new Date(),project_id,username};
 		int rows= t.update(command, valuesToFill);
 		if(rows>0)
 		{
@@ -181,22 +181,32 @@ public class StudentDao {
 		RowMapper<Integer> romap = new getUploadStudDataAdmin();
 		List<Integer> project = t.query(cmad, valuesFill, romap);
 		int project_id=project.get(0);
+		System.out.println("project id " + project_id);
 		
+		
+		String project_guide;
 		String cmd = "SELECT * FROM `project` WHERE `project_id` = ?";
 		Object valuesFillFac[] = {project_id};
 		RowMapper<ProjectObject> romapfac = new getProjectDataAdmin();
 		List<ProjectObject> projFac = t.query(cmd, valuesFillFac, romapfac);
-		String project_guide=projFac.get(0).getGuide();
-				
-			
+		if(projFac.isEmpty())
+		{project_guide="NA";
+		System.out.println("project id not available");
+		}
+		else
+		{project_guide=projFac.get(0).getGuide();
+				System.out.println("guide " + project_guide);
+		}	
 				
 				
 		String cmand = "SELECT `filename`, `filepath`, `filehash`, `timestamp`, `project_id`, `uploaded_by` FROM `files` WHERE uploaded_by = ? or uploaded_by = ?";
 		Object valuesFileFill[] = {username,project_guide};
 		RowMapper<file> romapFile = new getRetriveFile();
 		files = t.query(cmand, valuesFileFill, romapFile);
-		System.out.println("file name is");
-		System.out.println(files.get(0).getFilename());
+		System.out.println("file name is in dao");
+		if(files.isEmpty())
+		{System.out.println("files are not available");}
+		else {System.out.println(files.get(0).getFilename());}
 		if(files.size()>0)
 		{
 			return files;

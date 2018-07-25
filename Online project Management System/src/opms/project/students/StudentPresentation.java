@@ -12,6 +12,7 @@ import java.util.StringTokenizer;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -111,9 +112,18 @@ public class StudentPresentation {
 	
 	
 	@RequestMapping("/fileupload")
-	public ModelAndView fupload()
+	public ModelAndView fupload(HttpServletRequest request, HttpSession session)
 	{
 		ModelAndView mv = new ModelAndView();
+		
+		HttpSession sa = request.getSession();
+		String username = (String)sa.getAttribute("username");
+		
+		List<file> listOfFile = s.getListOfFiles(username);
+		System.out.println("size of list file in presentation " + listOfFile != null);
+		mv.addObject("fileview", listOfFile);
+		mv.addObject("projectUploadStat","project upload successfull");
+		
 		mv.setViewName("student/FileUpload.jsp");
 		return mv;
 	}
@@ -122,6 +132,9 @@ public class StudentPresentation {
 	public ModelAndView viewStat()
 	{
 		ModelAndView mv = new ModelAndView();
+		
+		
+		
 		mv.setViewName("student/viewStatus.jsp");
 		return mv;
 	}
@@ -152,8 +165,16 @@ public class StudentPresentation {
 		byte[] fileBytes = file.getBytes();
 
 		String UPLOADED_FOLDER = "C:\\Users\\gurav\\git\\online-project-management-system\\Online project Management System\\WebContent\\FileStorage\\";
+		System.out.println("if file is notnull");
+		System.out.println(file!=null);
+		System.out.println(file.getOriginalFilename());
 		String fileName=file.getOriginalFilename();
 		boolean sqlUploadStat = false;
+		
+		if(file.getOriginalFilename().equals(""))
+		{System.out.println("file is emptuy");}
+		else
+		{
 		sqlUploadStat = s.sqlUploads(UPLOADED_FOLDER,fileName,username);
 		
 		
@@ -168,15 +189,19 @@ public class StudentPresentation {
 			Path path = Paths.get(UPLOADED_FOLDER + username+ file.getOriginalFilename());
 			Files.write(path, fileBytes);
 			List<file> listOfFile = s.getListOfFiles(username);
+			System.out.println("size of list file in presentation " + listOfFile.size());
 			modelAndView.addObject("fileview", listOfFile);
 			modelAndView.addObject("projectUploadStat","project upload successfull");
 			
 		}
+		}
+
 		final String fileContent = new String(fileBytes);
 
 		System.out.println("File Data : " + fileContent);
+		modelAndView.addObject("uploadstatus","Upload Successfull");
 
-		modelAndView.setViewName("student/viewStatus.jsp");
+		modelAndView.setViewName("student/FileUpload.jsp");
 
 		return modelAndView;
 	}
