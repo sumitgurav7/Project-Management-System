@@ -23,6 +23,7 @@ import opms.project.admin.getStudentDataAdmin;
 import opms.project.comments.Comment;
 import opms.project.files.file;
 import opms.project.project.ProjectObject;
+import opms.project.status.Status;
 
 
 @Repository
@@ -246,12 +247,12 @@ public class StudentDao {
 	}
 
 	public List<Comment> getCommentByProjectId(int projectId) {
-		List<Comment> files = new ArrayList<Comment>();
+		List<Comment> comments = new ArrayList<Comment>();
 		
 		String cmad = "select * from comments where project_id =? order by timestamp ASC";
 		Object valuesFill[] = {projectId};
 		RowMapper<Comment> rw = new getProjectComments();
-		List<Comment> comments = t.query(cmad, valuesFill, rw);
+		comments = t.query(cmad, valuesFill, rw);
 		return comments;
 	}
 
@@ -262,6 +263,25 @@ public class StudentDao {
 		if(row <= 0)
 			return false;
 		return true;
+	}
+
+	public boolean addNewStatus(String projectId, String newStatus, String username) {
+		String cmd = "insert into status values(?,?,?,?)";
+		Object[]x = {new Timestamp(System.currentTimeMillis()), projectId, newStatus, username};
+		int row = t.update(cmd, x);
+		if(row <= 0)
+			return false;
+		return true;
+	}
+
+	public List<Status> getStatusByProjectId(int projectId) {
+		List<Status> status = new ArrayList<Status>();
+		
+		String cmad = "select * from status where project_id =? order by timestamp ASC";
+		Object valuesFill[] = {projectId};
+		RowMapper<Status> rw = new getStatus();
+		status = t.query(cmad, valuesFill, rw);
+		return status;
 	}
 
 }

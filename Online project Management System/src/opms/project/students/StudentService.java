@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import opms.project.comments.Comment;
 import opms.project.files.file;
 import opms.project.project.ProjectObject;
+import opms.project.status.Status;
 
 @Service
 public class StudentService {
@@ -71,5 +72,13 @@ public class StudentService {
 
 	public boolean addNewComment(String projectId, String newComment, String username) {
 		return sd.addNewComment(projectId, newComment, username);
+	}
+
+	public boolean addNewStatus(String projectId, String newStatus, String username) {
+		return sd.addNewStatus(projectId, newStatus, username);
+	}
+
+	public List<Status> getStatusByProjectId(int projectId) {
+		return sd.getStatusByProjectId(projectId);
 	}
 }

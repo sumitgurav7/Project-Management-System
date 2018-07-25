@@ -5,7 +5,7 @@
 <%@ taglib prefix="c" uri="/WEB-INF/c.tld" %>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>view status</title>
+<title>Discussions</title>
 <style type="text/css">
 
 .links{
@@ -33,7 +33,7 @@
   overflow-x: hidden;
   padding-top: 0px;
   position: absolute;
-  top: 350px;
+  top: 400px;
   left: 43%;
   float=right;
   transform: translate(-30%, -50%);
@@ -92,9 +92,15 @@
       </table>
    		<br>
 		<br>
-		
+		<c:forEach items="${statuslist}" var="comm">
+		<input type="text" readonly value="${comm.status}"> updated by: ${comm.updatedBy}<br><br>
+		</c:forEach>
+		<br>
 		<form action="addNewStatus" method="post">
-		<input type="text" placeholder="Add new status" id="newstatus" style="width:400px;"/>
+		<input type="hidden" name="projectid" value=${report.projectId}>
+		<input type="hidden" name="prn" value=${member.pnr}>
+		<input type="hidden" name="uname" value="${sessionScope.username}">
+		<input type="text" name="newStatus" placeholder="Add new status" id="newStatus" style="width:400px;"/>
 		<br><br><input type="submit" value="Add Status"/>
 		</form>
 		<br>
