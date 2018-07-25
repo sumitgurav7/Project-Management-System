@@ -1,6 +1,7 @@
 package opms.project.faculty;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -11,10 +12,14 @@ import org.springframework.stereotype.Repository;
 
 import opms.project.admin.getProjectDataAdmin;
 import opms.project.admin.getStudentDataAdmin;
+import opms.project.comments.Comment;
 import opms.project.files.file;
 import opms.project.project.ProjectObject;
+import opms.project.status.Status;
 import opms.project.students.Student;
+import opms.project.students.getProjectComments;
 import opms.project.students.getRetriveFile;
+import opms.project.students.getStatus;
 import opms.project.students.getUploadStudDataAdmin;
 
 @Repository
@@ -167,6 +172,38 @@ public class FacultyDao {
 		}
 		
 		return false;
+	}
+
+	public List<Status> getStatusByProjectId(String projectId) {
+		// TODO Auto-generated method stub
+		List<Status> status = new ArrayList<Status>();
+		
+		String cmad = "select * from status where project_id =? order by timestamp ASC";
+		Object valuesFill[] = {projectId};
+		RowMapper<Status> rw = new getStatus();
+		status = t.query(cmad, valuesFill, rw);
+		return status;
+	}
+
+	public List<Comment> getCommentByProjectId(String projectId) {
+		// TODO Auto-generated method stub
+		List<Comment> comments = new ArrayList<Comment>();
+		
+		String cmad = "select * from comments where project_id =? order by timestamp ASC";
+		Object valuesFill[] = {projectId};
+		RowMapper<Comment> rw = new getProjectComments();
+		comments = t.query(cmad, valuesFill, rw);
+		return comments;
+	}
+
+	public boolean addNewComment(String projectId, String newComment, String username) {
+		String cmd = "insert into comments values(?,?,?,?)";
+		System.out.println("Project Id at comment ins "+projectId);
+		Object[]x = {new Timestamp(System.currentTimeMillis()), projectId, newComment, username};
+		int row = t.update(cmd, x);
+		if(row <= 0)
+			return false;
+		return true;
 	}
 	
 	

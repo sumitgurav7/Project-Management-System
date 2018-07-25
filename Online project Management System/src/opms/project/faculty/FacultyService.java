@@ -5,8 +5,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import opms.project.comments.Comment;
 import opms.project.files.file;
 import opms.project.project.ProjectObject;
+import opms.project.status.Status;
 import opms.project.students.Student;
 
 @Service
@@ -54,4 +56,17 @@ public class FacultyService {
 		return fd.getDownloadFileDao(upload_id);
 	}
 	
+	public List<Status> getStatusByProjectId(String projectId) {
+		return fd.getStatusByProjectId(projectId);
+		
+	}
+	
+	public List<Comment> getCommentByProjectId(String projectId) {
+		return fd.getCommentByProjectId(projectId);
+	}
+	
+	public boolean addNewComment(String projectId, String newComment, String username) {
+		System.out.println("project id at service comment is " + projectId);
+		return fd.addNewComment(projectId, newComment, username);
+	}
 }

@@ -5,8 +5,12 @@
 <%@ taglib prefix="c" uri="/WEB-INF/c.tld" %>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>view status</title>
+<title>Discussions</title>
 <style type="text/css">
+
+.links{
+  white-space:pre;
+}
 
 .splitleft {
   height: 100%;
@@ -29,7 +33,7 @@
   overflow-x: hidden;
   padding-top: 0px;
   position: absolute;
-  top: 150px;
+  top: 400px;
   left: 43%;
   float=right;
   transform: translate(-30%, -50%);
@@ -61,20 +65,21 @@
         <a href="logout" class="links"><font color="white">Logout      </font></a>
 			</div>
 		</div>
-		<h3>Status Report</h3>
+		<h2>Discussion</h2>
+   		<br>
 		<br>
-		<br>
-		<c:forEach items="${statuslist}" var="comm">
-		<input type="text" readonly value="${comm.status}"> updated by: ${comm.updatedBy}<br><br>
+		<c:forEach items="${comments}" var="comm">
+		<input type="text" readonly value="${comm.comment}"> updated by: ${comm.updatedBy}<br><br>
 		</c:forEach>
 		<br>
+		<form action="addFacComment" method="post">
+		<input type="hidden" name="projectid" value="${proj_id}">
 		
-		
-		<form action="fcdiscuss">
-		
-		<input type="hidden" name="project_id" value="${pr_id}">
-		<input type="submit" name="submit" value="Discussion">
-		
+		<input type="hidden" name="uname" value="${sessionScope.username}">
+		<input type="text" name="newcomment" placeholder="Add new comment" id="newcomment" style="width:400px;"/>
+		<br><br><input type="submit" value="Add Comment"/>
 		</form>
+		<br>
+		<br>
 </body>
 </html>

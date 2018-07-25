@@ -98,8 +98,8 @@
 		</c:forEach>
 		<br>
 		<form action="addNewStatus" method="post">
-		<input type="hidden" name="projectid" value=${report.projectId}>
-		<input type="hidden" name="prn" value=${member.pnr}>
+		<input type="hidden" name="projectid" value="${report.projectId}">
+		<input type="hidden" name="prn" value="${member.pnr}">
 		<input type="hidden" name="uname" value="${sessionScope.username}">
 		<input type="text" name="newStatus" placeholder="Add new status" id="newStatus" style="width:400px;"/>
 		<br><br><input type="submit" value="Add Status"/>

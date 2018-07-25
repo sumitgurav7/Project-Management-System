@@ -144,11 +144,11 @@
 <div  class="splitcenter">
     <div class="panel panel-primary">
       <div class="panel-heading">
-        <a href="Projects" class="links"><font color="white">Projects Lists   </font></a>
+        <a href="guestProjects" class="links"><font color="white">Projects Lists   </font></a>
         <<!-- a href="viewStatusFac" class="links"><font color="white">Status   </font></a>
         <a href="" class="links"><font color="white">Comments   </font></a>
         <a href="" class="links"><font color="white">Notification   </font></a> -->
-        <a href="FileUploadFac" class="links"><font color="white">Files   </font></a>
+        <!-- <a href="FileUploadFac" class="links"><font color="white">Files   </font></a> -->
         <a href="logout" class="links"><font color="white">Logout      </font></a>
       </div>
     </div>
@@ -172,7 +172,7 @@
   	<input type="submit" class="rejectProject" value="Reject">
 	</div> --%>
 	
-	<form action="viewStatusFac">
+	<%-- <form action="viewStatusFac">
 		<input type="hidden" name="project_id" value="${projectObject.projectId}">
 		<input type="submit" name="submit" value="Status of Project">
 	</form>
@@ -182,7 +182,7 @@
 		<input type="hidden" name="project_id" value="${projectObject.projectId}">
 		<input type="submit" name="submit" value="Discussion">
 		
-		</form>
+		</form> --%>
 </div>
 </body>
 </html>

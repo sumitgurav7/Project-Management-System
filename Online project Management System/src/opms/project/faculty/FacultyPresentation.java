@@ -20,8 +20,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import opms.project.comments.Comment;
 import opms.project.files.file;
 import opms.project.project.ProjectObject;
+import opms.project.status.Status;
 import opms.project.students.Student;
 
 @Controller
@@ -64,7 +66,7 @@ public class FacultyPresentation {
 	
 	@RequestMapping("/viewStatusFac")
 	
-	public ModelAndView viewStatFac(HttpServletRequest request, HttpSession session)
+	public ModelAndView viewStatFac(HttpServletRequest request, HttpSession session,@RequestParam("project_id") String project_id)
 	{
 		
 		ModelAndView mv =new ModelAndView();
@@ -78,6 +80,11 @@ public class FacultyPresentation {
 		}
 		else
 		{
+			List<Status> statusList = fs.getStatusByProjectId(project_id);
+			mv.addObject("statuslist", statusList);
+			mv.addObject("pr_id",project_id);
+			
+			
 		mv.setViewName("/faculty/viewStatus.jsp");
 		}
 		return mv;
@@ -178,5 +185,39 @@ public class FacultyPresentation {
 		return modelAndView;
 	}
 	
+	
+	
+	@RequestMapping("/fcdiscuss")
+	public ModelAndView facDiscuss(@RequestParam("project_id") String project_id)
+	{
+		ModelAndView mv =new ModelAndView();
+		
+		List<Comment> commentList = fs.getCommentByProjectId(project_id);
+		mv.addObject("comments", commentList);
+		
+		mv.addObject("proj_id",project_id);
+		mv.setViewName("faculty/Discussion.jsp");
+		return mv;
+	}
+	
+	
+	@RequestMapping(value="/addFacComment", method=RequestMethod.POST)
+	public ModelAndView addNewDiscussion(@RequestParam("projectid") String projectId, @RequestParam("newcomment") String newComment,
+						 @RequestParam("uname") String username)
+	{
+		ModelAndView mv = new ModelAndView();
+		System.out.println("value of project id insert at pres layer  " + projectId);
+		boolean result = fs.addNewComment(projectId, newComment, username);
+		
+			
+			
+			List<Comment> commentList = fs.getCommentByProjectId(projectId);
+			mv.addObject("comments", commentList);
+		
+		
+		
+		mv.setViewName("faculty/Discussion.jsp");
+		return mv;
+	}
 	
 }

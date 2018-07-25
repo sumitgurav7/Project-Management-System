@@ -17,7 +17,7 @@
 		<li><a href="adminlg">Admin</a></li>
 		<li><a href="facultylg">Faculty</a></li>
 		<li><a href="studentlg">Student</a></li>
-		<li></li>
+		<li><a href="guestlg">Guest</a></li>
 		<li></li>
 		<li></li>
 		<li></li>
