@@ -1,6 +1,9 @@
 package opms.project.loginreg;
 
+import java.io.IOException;
+
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -25,7 +29,90 @@ public class LoginPresentation {
 		this.s = s;
 	}
 	
-	@RequestMapping("/newregistration")
+	/*
+	 * 
+	 * 
+	 * **********************************************************
+	 * 
+	 * 
+	 * 
+	 * */
+	
+	
+	
+	@RequestMapping(value="/newregistration_verification",method=RequestMethod.GET)
+	@ResponseBody
+	public ModelAndView verifyEmail(@RequestParam("username") String username, @RequestParam("code") int code) {
+		ModelAndView mv = new ModelAndView();
+		boolean result = s.verifyEmailId(username, code);
+		if(result) {
+			mv.addObject("result", "Verification Successful");
+		} else {
+			mv.addObject("result", "Verification was not successful");
+		}
+		mv.setViewName("/EmailVerification.jsp");
+		return mv;
+	}
+	
+	@RequestMapping(value="/newregistration",method=RequestMethod.POST)
+	@ResponseBody
+	public ModelAndView newLogin(HttpServletRequest request, HttpServletResponse response) throws IOException
+	{
+		String fname = request.getParameter("fname");
+		String email = request.getParameter("email");
+		String phn = request.getParameter("phn");
+		String type = request.getParameter("type");
+		String dept = request.getParameter("department");
+		String desig = request.getParameter("designation");
+		String pnr = request.getParameter("pnr");
+		String password = request.getParameter("password");
+		String url = request.getRequestURL().toString();
+		
+		ModelAndView mv = new ModelAndView();
+		boolean result = false;
+		
+			result = s.createNewRegistration(fname, email, phn, type, dept, desig, pnr, password, url);
+			if(result) {
+				if(type.equalsIgnoreCase("faculty")) {
+					mv.setViewName("/faculty/faculty_login.jsp");
+				} else if(type.equalsIgnoreCase("student")) {
+					mv.setViewName("/student/student_login.jsp");
+				} else if(type.equalsIgnoreCase("admin")) {
+					mv.setViewName("/admin/admin_login.jsp");
+				} else {
+					mv.setViewName("/registration.jsp");
+				}
+			} else {
+				mv.setViewName("/registration.jsp");
+			}		
+		
+		return mv;
+	}
+	
+	
+	
+	
+	
+	
+	/*
+	 * 
+	 * 
+	 * *******************************************************************************
+	 * 
+	 * 
+	 * 
+	 * */
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	/*@RequestMapping("/newregistration")
 	public ModelAndView newRegistration(@RequestParam("fname") String fname,
 			              @RequestParam("email") String email, @RequestParam("phn") String phn,
 			              @RequestParam("type") String type, @RequestParam("department") String dept,
@@ -52,7 +139,7 @@ public class LoginPresentation {
 	}
 	
 	
-	
+	*/
 	
 	
 	

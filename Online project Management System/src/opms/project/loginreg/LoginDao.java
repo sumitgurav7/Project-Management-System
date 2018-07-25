@@ -65,6 +65,7 @@ private JdbcTemplate t;
 			return false;
 		return true;
 	}
+	
 	public boolean deleteLogin(String username) {
 		String cmd = "delete from login_table where username= ?";
 		Object x[] = {username};
@@ -74,10 +75,6 @@ private JdbcTemplate t;
 		}
 		return true;
 	}
-	
-	
-	
-	
 	
 	/*
 	 * Below This my code which we will change according to future plan
@@ -164,13 +161,23 @@ private JdbcTemplate t;
 		return false;
 	}
 
-	public boolean createNewLogin(String username, String password) {
-		String cmd = "insert into login_table values(?,?,?,?,?,?)";
-		Object x[] = {username, password, new Date(),java.sql.Date.valueOf(LocalDate.now().plusMonths(6)),new Date(),0};
+	public boolean createNewLogin(String username, String password, int randNum) {
+		String cmd = "insert into login_table values(?,?,?,?,?,?,?)";
+		Object x[] = {username, password, new Date(),java.sql.Date.valueOf(LocalDate.now().plusMonths(6)),new Date(),0,randNum};
 		int row = t.update(cmd, x);
 		if(row <= 0) {
 			return false;
 		}
 		return true;
+	}
+
+	public boolean verifyEmailId(String username, int code) {
+		String cmd = "Update login_table set enabled = 1 where username=? and verification_code=?";
+		Object[] x = {username, code};
+		int row = t.update(cmd, x);
+		if(row > 0) {
+			return true;
+		}
+		return false;
 	}
 }
