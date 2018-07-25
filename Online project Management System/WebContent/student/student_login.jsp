@@ -4,20 +4,19 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>Student Login</title>
 </head>
-<body>
+<body background="./images/background3.jpg">
 <jsp:include page="./header.jsp"/>
-	<h1>Welcome Student</h1>
-	<a href="hmpg">Home</a><hr>
+	<div style="text-align:center;"><h1>Welcome Student</h1>
 	<form action="student_logins" method="post">
 	${entryVali}<hr>
 		Username: <input type="text" name="username">
-		Password: <input type="password" name="password">
-		<input type="submit"><br>
-		<a href="regi">New User? Sign Up here</a>
+	</br></br>Password: <input type="password" name="password">
+	</br></br><input type="submit" value="Login"><br>
+	</br></br></br><a href="regi">New User? Sign Up here</a>
 	
 	</form>
-
+	</div>
 </body>
 </html>

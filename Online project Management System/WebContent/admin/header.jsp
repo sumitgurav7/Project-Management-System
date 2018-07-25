@@ -8,7 +8,7 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 </head>
 <body>
-<h1 class="heading" style="padding: 20px; color: blue; border-bottom: solid; border-color: gray">Project Management System</h1>
+<h1 class="heading" style="text-align:center; padding: 20px; color: black; border-bottom: solid; border-color: gray">Project Management System</h1>
 
 <nav class="navbar navbar-inverse">
   <div class="container">

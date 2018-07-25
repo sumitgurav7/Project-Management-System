@@ -18,8 +18,6 @@
 			var t = "#".concat(data["projectid"]);
 			t = t.concat(" :selected");
 			data["facultyemail"] = $(t).val();
-			alert(data["projectid"]);
-			alert(data["facultyemail"]);
 			$.ajax({
 				type : "POST",
 				contentType : "application/json",

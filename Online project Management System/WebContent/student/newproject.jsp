@@ -87,6 +87,7 @@
     			url : "${pageContext.request.contextPath}/createNewProject",
     			data : JSON.stringify(data),
     			dataType : 'json',
+    			ajax : false,
     			timeout : 100000,
     			success : function(data) {
     				console.log("SUCCESS: ", data);
@@ -98,7 +99,7 @@
     			},
     			error : function(e) {
     				console.log("ERROR: ", e);
-    				alert(e);
+    				//alert(e);
     			},
     			done : function(e) {
     				console.log("DONE");
@@ -154,7 +155,6 @@
             console.log("ERROR: ", e);
             alert("No student found with PRN " + pnr);
             $("#member").val("");
-            //display(e);
           },
           done : function(e) {
             console.log("DONE");
@@ -179,16 +179,17 @@
 			</div>
 		</div>
     <h3>Create New Project</h3>
+    <br>
     <div class="links">
 	<form id="projectform" action="">
-      </br>Title         <input type="text" id="title" placeholder="Project Title" style="width:500px; height:40px;" />
+      <br>Title         <input type="text" id="title" placeholder="Project Title" style="width:500px; height:40px;" />
 
 
-      </br>Abstract   <input type="text" id="abstract" placeholder="Abstract" style="width: 500px; height: 80px"> 
+      <br>Abstract   <input type="text" id="abstract" placeholder="Abstract" style="width: 500px; height: 80px"> 
 
-        </br>Team Leader   <input type="text" name="teamlead" id="teamlead" placeholder="PRN">  <button id="leadsearchbutton">search</button>  <input type="text" id="leadfinalname" readonly >
-        </br>Team Members  <input type="text" id="member" placeholder="PRN">  <button id="membersearchbutton">search</button>  <input id="singlemember" type="text" readonly >  <button id="selectmember">+ Add</button>  <span id="allmember" style="height: 70px;"></span>
-      <button id="formsubmit">Create Project</button>
+        <br>Team Leader   <input type="text" name="teamlead" id="teamlead" placeholder="PRN">  <button id="leadsearchbutton">search</button>  <input type="text" id="leadfinalname" readonly >
+        <br>Team Members  <input type="text" id="member" placeholder="PRN">  <button id="membersearchbutton">search</button>  <input id="singlemember" type="text" readonly >  <button id="selectmember">+ Add</button>  <span id="allmember" style="height: 70px;"></span>
+      <br><br><button id="formsubmit">Create Project</button>
       </form>
     </div> 
 </div>

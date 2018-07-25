@@ -70,7 +70,6 @@
     	var data = {}
     	data["projectId"] = arguments[1];
     	data["valToPass"] = arguments[0];
-		alert("approve project called");
     	$.ajax({
 			type : "POST",
 			contentType : "application/json",

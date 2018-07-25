@@ -6,20 +6,20 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Admin Login</title>
 </head>
-<body>
+<body background="./images/background3.jpg">
 <jsp:include page="./header.jsp"/>
-	<h1>Welcome Admin</h1>
+	<div style="text-align:center;"><h1>Welcome Admin</h1>
 	
-	<a href="hmpg">Home</a><hr>
-	<form action="admin_login" method="post">
+		<form action="admin_login" method="post">
 	${entryVali}<hr>
 		Username: <input type="text" name="username">
-		Password: <input type="password" name="password">
-		<input type="submit">
+		</br></br>Password: <input type="password" name="password">
+		</br></br><input type="submit">
 		<br>
-		<a href="regi">New User? Sign Up here</a>
+		</br></br><a href="regi">New User? Sign Up here</a>
 	
 	</form>
+	</div>
 
 </body>
 </html>

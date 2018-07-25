@@ -302,7 +302,8 @@
 </div>
 <br>
 <br>
-    <div id="updateStudentDiv">
+    <div id="updateStudentDiv" style="white-space:pre;float:left;width:30%;text-align:right;">
+    </br>
      <h3>Update Student</h3>
      PRN         <input type="text" readonly id="spnr" value=""><br>
     Name       <input type="text" id="sname" value=""><br>
@@ -313,8 +314,8 @@
     <br><button id="upbtnstu">Update</button>
   </div>
   <br>
-   <div id="updateFacultyDiv">
-  	<h3>Update Faculty</h3>
+   <div id="updateFacultyDiv" style="white-space:pre;float:right; width:50%;text-align:left;">
+  	<h3>  Update Faculty</h3>
    <form action="" method="post">
     Email-Id   <input type="text" readonly id="femail" value="${facultyObject.email_id}"><br>
     Name        <input type="text" id="fname" value="${facultyObject.name}"><br>

@@ -19,12 +19,10 @@
 
 .left {
   left: 0;
-  background-color: SeaGreen;
 }
 
 .right {
   right: 0;
-  background-color: Goldenrod;
 }
 
 .centered {
@@ -68,7 +66,7 @@
 	})
 </script>
 </head>
-<body>
+<body background="./images/background3.jpg">
 <div class="split left">
 	<div class="centered">
 		<h2>Welcome to</h2>
@@ -77,7 +75,7 @@
 </div>
 <div class="split right">
 <div class="centered">
-<div style="border: solid; align:center; text-align: center;line-height: 26pt">
+<div style="border: solid; align:center; text-align: center;line-height: 26pt;width:500px;">
 	<h1>New Registration</h1>
 <form action="newregistration" method="post">
 </br>Name <input type="text" name="fname" placeholder="Full Name"/>
@@ -88,7 +86,6 @@
 </br>You are a 
  <select value="type" id="type" class="type" name="type">
  <option value="empty">   -----</option>
-  <option value="admin">Admin</option>
   <option value="faculty">Faculty</option>
   <option value="student">Student</option>
 </select>
@@ -97,20 +94,20 @@
 </br>Department
  <select value="department" name="department">
  <option value="empty">   -----</option>
-  <option value="admin">PG-DAC</option>
-  <option value="faculty">PG-DITISS</option>
-  <option value="student">PG-DMC</option>
-  <option value="student">PG-DESD</option>
-  <option value="student">PG-DVLSI</option>
+  <option value="PG-DAC">PG-DAC</option>
+  <option value="PG-DITTIS">PG-DITISS</option>
+  <option value="PG-DMC">PG-DMC</option>
+  <option value="PG-DESD">PG-DESD</option>
+  <option value="PG-DVLSI">PG-DVLSI</option>
 </select>
 </div>
 <div id="dsg" name="dsg" style="visibility: hidden;">
 </br>Designation
  <select value="designation" class="designation" name="designation">
  <option value="empty">   -----</option>
-  <option value="admin">assistant Faculty</option>
-  <option value="faculty">Senior Faculty</option>
-  <option value="student">HOD</option>
+  <option value="Assistant Faculty">assistant Faculty</option>
+  <option value="Senior Faculty">Senior Faculty</option>
+  <option value="HOD">HOD</option>
 </select>
 </div>
 

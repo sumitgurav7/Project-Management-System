@@ -8,11 +8,11 @@
 	</head>
 
 <body>
-<h1 class="heading" style="padding: 20px; color: blue; border-bottom: solid; border-color: gray">Project Management System</h1>
+<h1 class="heading" style="text-align:center; padding: 20px; color: black; border-bottom: solid; border-color: gray">Project Management System</h1>
 
 <nav class="navbar navbar-inverse">
   <div class="container">
-	<ul class="nav navbar-nav" style="margin-left: 20%;font-size: 20px; ">
+	<ul class="nav navbar-nav" style="margin-left: 30%;font-size: 20px; ">
 		<li><a href="#">Home</a></li>
 		<li><a href="adminlg">Admin</a></li>
 		<li><a href="facultylg">Faculty</a></li>
