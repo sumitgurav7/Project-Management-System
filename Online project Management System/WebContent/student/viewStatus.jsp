@@ -8,6 +8,10 @@
 <title>view status</title>
 <style type="text/css">
 
+.links{
+  white-space:pre;
+}
+
 .splitleft {
   height: 100%;
   width:18.7%;
@@ -29,7 +33,7 @@
   overflow-x: hidden;
   padding-top: 0px;
   position: absolute;
-  top: 250px;
+  top: 350px;
   left: 43%;
   float=right;
   transform: translate(-30%, -50%);
@@ -61,15 +65,19 @@
 			</div>
 		</div>
 		<h3>Status Report</h3>
+
 		<form action="statusreport" method="post">
 			<input type="hidden" name="username" value="${sessionScope.username}">
 			<input type="submit" value="View">
 			<h3>	${statusre}</h3>
 		</form>
-Title         <input type="text" value="${report.title}" style="width:500px; height:40px;" />
+		<br>
+		<br>
+<div class="links">Title         <input type="text" value="${report.title}" style="width:500px; height:40px;" /></div>
 
-
-      </br>Abstract   <input type="text" value="${report.abs}" style="width: 500px; height: 80px"> 
+		<br>
+		<br>
+      </br><div class="links">Abstract   <input type="text" value="${report.abs}" style="width: 500px; height: 80px"></div> 
       <table>
       <tr>
       	<th>Name of Student </th>
@@ -82,5 +90,14 @@ Title         <input type="text" value="${report.title}" style="width:500px; hei
       </tr>
       </c:forEach>
       </table>
+   		<br>
+		<br>
+		
+		<form action="addNewStatus" method="post">
+		<input type="text" placeholder="Add new status" id="newstatus" style="width:400px;"/>
+		<br><br><input type="submit" value="Add Status"/>
+		</form>
+		<br>
+		<br>
 </body>
 </html>

@@ -36,6 +36,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import opms.project.comments.Comment;
 import opms.project.files.file;
 import opms.project.project.*;
 
@@ -243,6 +244,36 @@ public class StudentPresentation {
 		return mv;
 	}
 	
+	@RequestMapping(value="/getDiscussion", method=RequestMethod.POST)
+	public ModelAndView getDiscussion(@RequestParam("username") String username)
+	{
+		ModelAndView mv = new ModelAndView();
+		ProjectObject listOfReport = s.returnReport(username);
+		if(listOfReport != null)
+		{
+			if(listOfReport.getStatus() == 0)
+			{mv.addObject("statusre", "Project approval Pending");}
+			if(listOfReport.getStatus() == 1)
+			{mv.addObject("statusre", "Project approved");}
+			if(listOfReport.getStatus() == 2)
+			{mv.addObject("statusre", "Project dis-approved");}
+			else
+			{System.out.println("nothing");}
+			mv.addObject("report", listOfReport);
+			List<Student> studentList = s.returnMembers(listOfReport.getProjectId());
+			mv.addObject("members",studentList);
+			List<Comment> commentList = s.getCommentByProjectId(listOfReport.getProjectId());
+			mv.addObject("comments", commentList);
+		}
+		else
+		{mv.addObject("statusre", "No project For this User");}
+		
+		
+		
+		mv.setViewName("student/Discussion.jsp");
+		return mv;
+	}
+	
 	
 	
 	
@@ -279,7 +310,37 @@ public class StudentPresentation {
 		FileCopyUtils.copy(inputStream, httpServletResponse.getOutputStream());
 	}
 	
-	
+	@RequestMapping(value="/addNewComment", method=RequestMethod.POST)
+	public ModelAndView addNewDiscussion(@RequestParam("projectid") String projectId, @RequestParam("newcomment") String newComment,
+						@RequestParam("prn") String prn, @RequestParam("uname") String username)
+	{
+		ModelAndView mv = new ModelAndView();
+		boolean result = s.addNewComment(projectId, newComment, username);
+		ProjectObject listOfReport = s.returnReport(username);
+		if(listOfReport != null)
+		{
+			if(listOfReport.getStatus() == 0)
+			{mv.addObject("statusre", "Project approval Pending");}
+			if(listOfReport.getStatus() == 1)
+			{mv.addObject("statusre", "Project approved");}
+			if(listOfReport.getStatus() == 2)
+			{mv.addObject("statusre", "Project dis-approved");}
+			else
+			{System.out.println("nothing");}
+			mv.addObject("report", listOfReport);
+			List<Student> studentList = s.returnMembers(listOfReport.getProjectId());
+			mv.addObject("members",studentList);
+			List<Comment> commentList = s.getCommentByProjectId(listOfReport.getProjectId());
+			mv.addObject("comments", commentList);
+		}
+		else
+		{mv.addObject("statusre", "No project For this User");}
+		
+		
+		
+		mv.setViewName("student/Discussion.jsp");
+		return mv;
+	}
 	
 	
 }

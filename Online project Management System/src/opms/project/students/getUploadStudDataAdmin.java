@@ -5,12 +5,14 @@ import java.sql.SQLException;
 
 import org.springframework.jdbc.core.RowMapper;
 
+import opms.project.comments.Comment;
+import opms.project.project.ProjectObject;
+
 public class getUploadStudDataAdmin implements RowMapper<Integer> {
 
 	@Override
 	public Integer mapRow(ResultSet arg0, int arg1) throws SQLException {
-		// TODO Auto-generated method stub
-		return arg0.getInt("project_id");
+		 return arg0.getInt("project_id");
 	}
 
 }

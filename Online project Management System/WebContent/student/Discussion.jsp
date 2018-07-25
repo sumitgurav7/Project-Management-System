@@ -2,10 +2,15 @@
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
+<%@ taglib prefix="c" uri="/WEB-INF/c.tld" %>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>discussion</title>
+<title>Discussions</title>
 <style type="text/css">
+
+.links{
+  white-space:pre;
+}
 
 .splitleft {
   height: 100%;
@@ -28,7 +33,7 @@
   overflow-x: hidden;
   padding-top: 0px;
   position: absolute;
-  top: 150px;
+  top: 400px;
   left: 43%;
   float=right;
   transform: translate(-30%, -50%);
@@ -47,7 +52,7 @@
 </head>
 <body background="./images/background4.jpeg">
 <div class="splitleft">
-<h3>Welcome to</h3></br><h2>CDAC </br>Project Management System</h2>
+<h3>Welcome ${sessionScope.username}</h3></br><h2>CDAC </br>Project Management System</h2>
 </div>
 <div  class="splitcenter">
 		<div class="panel panel-primary">
@@ -59,11 +64,46 @@
         <a href="logout" class="links"><font color="white">Logout      </font></a>
 			</div>
 		</div>
-		
-Title         <input type="text" placeholder="Project Title" style="width:500px; height:40px;" />
+		<h3>Status Report</h3>
 
+		<form action="getDiscussion" method="post">
+			<input type="hidden" name="username" value="${sessionScope.username}">
+			<input type="submit" value="View">
+			<h3>	${statusre}</h3>
+		</form>
+		<br>
+		<br>
+<div class="links">Title         <input type="text" value="${report.title}" style="width:500px; height:40px;" /></div>
 
-      </br>Abstract   <input type="text" placeholder="Abstract" style="width: 500px; height: 80px"> 
- </div>
+		<br>
+		<br>
+      </br><div class="links">Abstract   <input type="text" value="${report.abs}" style="width: 500px; height: 80px"></div> 
+      <table>
+      <tr>
+      	<th>Name of Student </th>
+      	<th> PRN </th>
+      </tr>
+      <c:forEach items="${members}" var="member">
+      <tr>
+      	<td>${member.fname}</td>
+      	<td>${member.pnr}</td>
+      </tr>
+      </c:forEach>
+      </table>
+   		<br>
+		<br>
+		<c:forEach items="${comments}" var="comm">
+		<input type="text" readonly value="${comm.comment}"> updated by: ${comm.updatedBy}<br><br>
+		</c:forEach>
+		<br>
+		<form action="addNewComment" method="post">
+		<input type="hidden" name="projectid" value=${report.projectId}>
+		<input type="hidden" name="prn" value=${member.pnr}>
+		<input type="hidden" name="uname" value="${sessionScope.username}">
+		<input type="text" name="newcomment" placeholder="Add new comment" id="newcomment" style="width:400px;"/>
+		<br><br><input type="submit" value="Add Comment"/>
+		</form>
+		<br>
+		<br>
 </body>
 </html>

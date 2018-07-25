@@ -20,6 +20,7 @@ import com.mysql.jdbc.Statement;
 
 import opms.project.admin.getProjectDataAdmin;
 import opms.project.admin.getStudentDataAdmin;
+import opms.project.comments.Comment;
 import opms.project.files.file;
 import opms.project.project.ProjectObject;
 
@@ -242,6 +243,25 @@ public class StudentDao {
 		return null;
 		
 	
+	}
+
+	public List<Comment> getCommentByProjectId(int projectId) {
+		List<Comment> files = new ArrayList<Comment>();
+		
+		String cmad = "select * from comments where project_id =? order by timestamp ASC";
+		Object valuesFill[] = {projectId};
+		RowMapper<Comment> rw = new getProjectComments();
+		List<Comment> comments = t.query(cmad, valuesFill, rw);
+		return comments;
+	}
+
+	public boolean addNewComment(String projectId, String newComment, String username) {
+		String cmd = "insert into comments values(?,?,?,?)";
+		Object[]x = {new Timestamp(System.currentTimeMillis()), projectId, newComment, username};
+		int row = t.update(cmd, x);
+		if(row <= 0)
+			return false;
+		return true;
 	}
 
 }
