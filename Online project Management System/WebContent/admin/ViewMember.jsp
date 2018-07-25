@@ -6,6 +6,166 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>View Member</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+	$(function(){
+		$("#memberby").change(function(){
+			if($("#memberby").val() == "faculty") {
+				var newOptions = {"All" : "all",
+							"Email": "email",
+					  		"Department": "department"};
+
+				var $el = $("#searchby");
+				$el.empty(); // remove old options
+				$.each(newOptions, function(key,value) {
+				  $el.append($("<option></option>")
+				     .attr("value", value).text(key));
+				});
+			}
+			if($("#memberby").val() == "student") {
+				var newOptions = {"All" : "all",
+								"Email": "email",
+						  		"Department": "department",
+						  		"PRN": "prn"};
+				var $el = $("#searchby");
+				$el.empty(); // remove old options
+				$.each(newOptions, function(key,value) {
+				  $el.append($("<option></option>")
+				     .attr("value", value).text(key));
+				});
+			}
+		});
+		
+		$(".deleteStudent").click(function(event){
+			event.preventDefault();
+			var prn = $(this).parent().siblings("td:eq(0)").text();
+			processDelete(1, prn);
+		});
+		
+		$(".deleteFaculty").click(function(event){
+			event.preventDefault();
+			var emailid = $(this).parent().siblings("td:eq(0)").text();
+			processDelete(2, emailid);
+		});
+		
+		$(".updateStudent1").click(function(event){
+			event.preventDefault();
+			$("#spnr").val($(this).parent().siblings("td:eq(0)").text());
+			$("#sname").val($(this).parent().siblings("td:eq(1)").text());
+			$("#semail").val($(this).parent().siblings("td:eq(2)").text());
+			$("#sdept").val($(this).parent().siblings("td:eq(3)").text());
+			$("#sphn").val($(this).parent().siblings("td:eq(4)").text());
+			$("#spid").val($(this).parent().siblings("td:eq(5)").text());
+		});
+		
+		$(".updateFaculty1").click(function(event){
+			event.preventDefault();
+			$("#femail").val($(this).parent().siblings("td:eq(0)").text());
+			$("#fname").val($(this).parent().siblings("td:eq(1)").text());
+			$("#fdept").val($(this).parent().siblings("td:eq(2)").text());
+			$("#fdesign").val($(this).parent().siblings("td:eq(3)").text());
+			$("#fphn").val($(this).parent().siblings("td:eq(4)").text());
+		});
+		
+		$("#upbtnstu").click(function(event){
+			event.preventDefault();
+			var data = {}
+			data["prn"] = $("#spnr").val();
+			data["name"] = $("#sname").val();
+			data["dept"] = $("#sdept").val();
+			data["phn"] = $("#sphn").val();
+			data["pid"] = $("#spid").val();
+			$.ajax({
+				type : "POST",
+				contentType : "application/json",
+				url : "${pageContext.request.contextPath}/updateStudent",
+				data : JSON.stringify(data),
+				dataType : 'json',
+				async : false,
+				timeout : 100000,
+				success : function(data) {
+					console.log("SUCCESS: ", data);
+					if(data == true){
+						alert("Student updated successfully");	
+					} else {
+						alert("Student coult not be updated successfully");
+					}
+				},
+				error : function(e) {
+					console.log("ERROR: ", e);
+					alert(e);
+				},
+				done : function(e) {
+					console.log("DONE");
+				}
+			});
+		});
+		
+		$("#upbtnfac").click(function(event){
+			event.preventDefault();
+			var data = {}
+			data["email"] = $("#femail").val();
+			data["name"] = $("#fname").val();
+			data["dept"] = $("#fdept").val();
+			data["phn"] = $("#fphn").val();
+			data["design"] = $("#fdesign").val();
+			$.ajax({
+				type : "POST",
+				contentType : "application/json",
+				url : "${pageContext.request.contextPath}/updateFaculty",
+				data : JSON.stringify(data),
+				dataType : 'json',
+				async : false,
+				timeout : 100000,
+				success : function(data) {
+					console.log("SUCCESS: ", data);
+					if(data == true){
+						alert("Faculty updated successfully");	
+					} else {
+						alert("Faculty coult not be updated successfully");
+					}
+				},
+				error : function(e) {
+					console.log("ERROR: ", e);
+					alert(e);
+				},
+				done : function(e) {
+					console.log("DONE");
+				}
+			});
+		});
+	});
+	
+	function processDelete(){
+		var data = {}
+		data["id"] = arguments[1];
+		data["membertype"] = arguments[0];
+    	$.ajax({
+			type : "POST",
+			contentType : "application/json",
+			url : "${pageContext.request.contextPath}/deleteProcess",
+			data : JSON.stringify(data),
+			dataType : 'json',
+			async : false,
+			timeout : 100000,
+			success : function(data) {
+				console.log("SUCCESS: ", data);
+				if(data == true){
+					alert("Action completed successfully");	
+				} else {
+					alert("Action did not complete successfully");
+				}
+			},
+			error : function(e) {
+				console.log("ERROR: ", e);
+				alert(e);
+			},
+			done : function(e) {
+				console.log("DONE");
+			}
+		});
+	}
+</script>
 <style type="text/css">
 
 .splitleft {
@@ -64,22 +224,21 @@
     <h3>Search Member</h3>
     <br>
   <form id="projectform" action="viewdata" method="post">
-  <select name="memberby">
-    <option>select</option>
+  <select name="memberby" id="memberby">
     <option value="student">student</option>
     <option value="faculty">faculty</option>
   </select>
     &nbsp; &nbsp; &nbsp; &nbsp;
-  <select name="searchby">
-    <option>search by</option>
+  <select name="searchby" id="searchby">
+    <option value="all">All</option>
     <option value="email">email-id</option>
-    <option value="pnr">PRN</option>
+    <option id="prn" value="pnr">PRN</option>
     <option value="dept">Department</option>
   </select>
   &nbsp; &nbsp; &nbsp;
   <input type="text" name="searchvalue"> 
   <br><br>
-<button id="selectall">get all</button>
+  <button id="selectall">get all</button>
   &nbsp; &nbsp; &nbsp; &nbsp;
 <button id="selectone">Search</button>
   </form>
@@ -107,29 +266,14 @@
   	<td>${i.deptartment}</td>
   	<td>${i.contact_no}</td>
   	<td>${i.projectId}</td>
-  	<td>
-  	<form action="delStud" method="post">
-  	<input type="hidden" name="pnr" value="${i.pnr}">
-  	<input type="submit" value="Delete">
-  	</form>
-  	</td>
-  	<td>
-  	<form action="toUpdateStudent" method="post">
-  	<input type="hidden" name="pnr" value="${i.pnr}">
-  	<input type="hidden" name="fname" value="${i.fname}">
-  	<input type="hidden" name="email" value="${i.email}">
-  	<input type="hidden" name="deptartment" value="${i.deptartment}">
-  	<input type="hidden" name="contact_no" value="${i.contact_no}">
-  	<input type="hidden" name="projectId" value="${i.projectId}">
-  	<input type="submit" value="Update">
-  	</form>
-  	
-  	</td>
+  	<td> <input type="submit" class="deleteStudent" value="Delete"></td>
+  	<td><input type="submit" class="updateStudent1" value="Update"></td>
   	
   </tr>
   </c:forEach>
 </table>
   </div>
+  <div id="facultytabdiv">
    <table style="width:100%" border ="1">
   <caption><b><h3>Faculty Details<h3><b></caption>
   <tr>
@@ -144,49 +288,40 @@
   <c:forEach items="${viewAllKeyFaculty}" var = "k">
   <tr>
   	
-  	<th>${k.email_id}</th>
-  	<th>${k.name}</th>
-  	<th>${k.department}</th>
-  	<th>${k.designation}</th>
-  	<th>${k.contact_no}</th>
-  	<th><form action="delFac" method="post">
-  	<input type="hidden" name="id" value="${k.email_id}">
-  	<input type="submit" value="Delete">
-  	</form></th>
-  	<th><form action="toUpdateFacu" method="post">
-  	<input type="hidden" name="email_id" value="${k.email_id}">
-  	<input type="hidden" name="name" value="${k.name}">
-  	<input type="hidden" name="department" value="${k.department}">
-  	<input type="hidden" name="designation" value="${k.designation}">
-  	<input type="hidden" name="contact_no" value="${k.contact_no}">
-  	<input type="submit" value="Update">
-  	</form></th>
+  	<td>${k.email_id}</td>
+  	<td>${k.name}</td>
+  	<td>${k.department}</td>
+  	<td>${k.designation}</td>
+  	<td>${k.contact_no}</td>
+  	<td><input type="submit" class="deleteFaculty" value="Delete"></td>
+  	<td><input type="submit" class="updateFaculty1" value="Update"></td>
   
   </tr>
   </c:forEach>  
 </table>
+</div>
 <br>
 <br>
     <div id="updateStudentDiv">
      <h3>Update Student</h3>
-     PRN         <input type="text" id="pnr" value="${studentObject.pnr}"><br>
-    Name       <input type="text" id="name" value="${studentObject.fname}"><br>
-    Email-Id   <input type="text" id="email" value="${studentObject.email}"><br>
-    Department <input type="text" id="dept" value="${studentObject.deptartment}"><br>
-    Contact No <input type="text" id="phn" value="${studentObject.contact_no}"><br>
-    Project Id <input type="text" id="projcet" value="${studentObject.projectId}">
-    <br><button id="upbtn">Update</button>
+     PRN         <input type="text" readonly id="spnr" value=""><br>
+    Name       <input type="text" id="sname" value=""><br>
+    Email-Id   <input type="text" readonly id="semail" value=""><br>
+    Department <input type="text" id="sdept" value=""><br>
+    Contact No <input type="text" id="sphn" value=""><br>
+    Project Id <input type="text" id="spid" value="">
+    <br><button id="upbtnstu">Update</button>
   </div>
   <br>
    <div id="updateFacultyDiv">
   	<h3>Update Faculty</h3>
    <form action="" method="post">
-    Email-Id   <input type="text" id="email" value="${facultyObject.email_id}"><br>
-    Name        <input type="text" id="name" value="${facultyObject.name}"><br>
-    Department  <input type="text" id="dept" value="${facultyObject.department}"><br>
-    Designation <input type="text" id="design" value="${facultyObject.designation}"><br>
-    Contact No <input type="text" id="phn" value="${facultyObject.contact_no}"><br>
-    <br><button id="upbtn">Update</button>
+    Email-Id   <input type="text" readonly id="femail" value="${facultyObject.email_id}"><br>
+    Name        <input type="text" id="fname" value="${facultyObject.name}"><br>
+    Department  <input type="text" id="fdept" value="${facultyObject.department}"><br>
+    Designation <input type="text" id="fdesign" value="${facultyObject.designation}"><br>
+    Contact No <input type="text" readonly id="fphn" value="${facultyObject.contact_no}"><br>
+    <br><button id="upbtnfac">Update</button>
     </form>
   </div>
 </div>

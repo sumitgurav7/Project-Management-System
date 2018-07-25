@@ -205,4 +205,72 @@ public class AdminDao {
 		return true;
 	}
 
+	public boolean deleteStudent(String prn) {
+		String cmd = "delete from student where pnr= ?";
+		Object[] x = {prn};
+		System.out.println(cmd);
+		int row = t.update(cmd, x);
+		if(row <= 0) {
+			return false;
+		}
+		return true;
+	}
+
+	public boolean deleteFaculty(String id) {
+		String cmd = "DELETE FROM `faculty` WHERE email_id = ?";
+		Object fillValue[] = {id};
+		int i = t.update(cmd, fillValue);
+		if(i <= 0)
+			return false;
+		return true;
+	}
+
+	public boolean updateStudent(String prn, String name, String dept, String phn, int pid) {
+		String cmd = "update student set name = ?, department = ?, contact_no = ?, project_id= ? where pnr = ?";
+		Object[] x = {name, dept, phn, pid, prn};
+		int row = t.update(cmd, x);
+		if(row <= 0)
+			return false;
+		return true;
+	}
+
+	public boolean updateFaculty(String email, String name, String dept, String phn, String desig) {
+		String cmd = "update faculty set name = ?, department = ?, designation = ?, contact_no = ? where email_id = ?";
+		Object[] x = {name, dept, desig, phn, email};
+		int row = t.update(cmd, x);
+		if(row <= 0)
+			return false;
+		return true;
+	}
+
+	public List<Student> getStudentByCondition(String searchtype, String searchValue) {
+		StringBuilder sb = new StringBuilder("select * from student where ");
+		if(searchtype.equals("pnr")) {
+			sb.append("pnr = ?");
+		} else if(searchtype.equals("email")) {
+			sb.append("email_id = ?");
+		} else if(searchtype.equals("dept")) {
+			sb.append("department = ?");
+		}
+		String cmd = sb.toString();
+		Object[] x = {searchValue};
+		RowMapper<Student> rw = new getStudentDataAdmin();
+		List<Student>list = t.query(cmd, x, rw);
+		return list;
+	}
+	
+	public List<Faculty> getFacultyByCondition(String searchtype, String searchValue) {
+		StringBuilder sb = new StringBuilder("select * from faculty where ");
+		if(searchtype.equals("email")) {
+			sb.append("email_id = ?");
+		} else if(searchtype.equals("department")) {
+			sb.append("department = ?");
+		}
+		String cmd = sb.toString();
+		Object[] x = {searchValue};
+		RowMapper<Faculty> rw = new getFacultyDataAdmin();
+		List<Faculty>list = t.query(cmd, x, rw);
+		return list;
+	}
+
 }
