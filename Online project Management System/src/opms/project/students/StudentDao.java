@@ -246,7 +246,8 @@ public class StudentDao {
 	
 	}
 
-	public List<Comment> getCommentByProjectId(int projectId) {
+/*<<<<<<< Upstream, based on branch 'master' of https://sumitgurav7@bitbucket.org/prachibhardwaj/online-project-management-system.git
+*/	public List<Comment> getCommentByProjectId(int projectId) {
 		List<Comment> comments = new ArrayList<Comment>();
 		
 		String cmad = "select * from comments where project_id =? order by timestamp ASC";
@@ -282,6 +283,54 @@ public class StudentDao {
 		RowMapper<Status> rw = new getStatus();
 		status = t.query(cmad, valuesFill, rw);
 		return status;
+		}
+
+	}
+		
+		
+/*=======*/
+/*	public boolean statEntryDao(String status, String username) {
+		// TODO Auto-generated method stub
+		
+		
+		String cmad = "select project_id from student where pnr =?";
+		Object valuesFill[] = {username};
+		RowMapper<Integer> romap = new getUploadStudDataAdmin();
+		List<Integer> project = t.query(cmad, valuesFill, romap);
+		int project_id=project.get(0);
+		System.out.println("project id " + project_id);
+		
+		
+		String command = "INSERT INTO `status`(`timestamp`, `project_id`, `description`, `updated_by`) VALUES (?,?,?,?)";
+		Object valuesToFill[] = {new Date(),project_id,status,username};
+		int rows= t.update(command, valuesToFill);
+		if(rows>0)
+		{
+			return true;
+		}
+		
+		return false;
+		
+		
 	}
 
-}
+	public List<Status> getStatusFromDao(String username) {
+		// TODO Auto-generated method stub
+		
+		String cmad = "select project_id from student where pnr =?";
+		Object valuesFill[] = {username};
+		RowMapper<Integer> romap = new getUploadStudDataAdmin();
+		List<Integer> project = t.query(cmad, valuesFill, romap);
+		int project_id=project.get(0);
+		System.out.println("project id " + project_id);
+		
+		String cmand = "SELECT * FROM `status` WHERE project_id = ?";
+		Object valuesToFill[] = {project_id};
+		RowMapper<Status> rowmap = new getStatusRow();
+		List<Status> status = t.query(cmand, valuesToFill, rowmap);
+		
+>>>>>>> 659ff5c ff*/
+/*		return status;
+	}
+
+}*/

@@ -66,6 +66,9 @@ public class StudentService {
 		return sd.getDownloadFileDao(upload_id);
 	}
 
+/*<<<<<<< Upstream, based on branch 'master' of https://sumitgurav7@bitbucket.org/prachibhardwaj/online-project-management-system.git
+*/	
+	
 	public List<Comment> getCommentByProjectId(int projectId) {
 		return sd.getCommentByProjectId(projectId);
 	}
@@ -80,5 +83,24 @@ public class StudentService {
 
 	public List<Status> getStatusByProjectId(int projectId) {
 		return sd.getStatusByProjectId(projectId);
+		
 	}
 }
+
+
+
+
+
+		
+/*=======
+	public boolean statEntryService(String status, String username) {
+		// TODO Auto-generated method stub
+		return sd.statEntryDao(status,username);
+	}
+
+	public List<Status> getStatusFromService(String username) {
+		// TODO Auto-generated method stub
+		return sd.getStatusFromDao(username);
+>>>>>>> 659ff5c ff*/
+/*	}
+}*/

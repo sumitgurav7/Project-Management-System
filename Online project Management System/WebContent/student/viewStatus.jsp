@@ -90,6 +90,7 @@
       </tr>
       </c:forEach>
       </table>
+<!-- <<<<<<< Upstream, based on branch 'master' of https://sumitgurav7@bitbucket.org/prachibhardwaj/online-project-management-system.git -->
    		<br>
 		<br>
 		<c:forEach items="${statuslist}" var="comm">
@@ -105,5 +106,40 @@
 		</form>
 		<br>
 		<br>
+		
+		
+<%-- =======
+      
+      <br>
+      <br>
+      <h4>Status</h4>
+      <table>
+      	<tr>
+      		<th>Time</th>
+      		<th>Updated By</th>
+      		<th>Status</th>
+      	
+      	</tr>
+      	<c:forEach items="${listret}" var="st">
+      	<tr>
+      	
+      		<td>${st.timestamp}</td>
+      		<td>${st.updated_by}</td>
+      		<td>${st.description}</td>
+      	
+      	</tr>
+      </c:forEach>
+      </table>
+      
+      
+      <form action="addstatus" method="post">
+      
+	      <input type="text" name="statentry">
+	      <input type="hidden" name="username" value="${sessionScope.username}">
+	      <input type="submit" value="Submit Status">
+      
+      
+      </form>
+>>>>>>> 659ff5c ff --%>
 </body>
 </html>

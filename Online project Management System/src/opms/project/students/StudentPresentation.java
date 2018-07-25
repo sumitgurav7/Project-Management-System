@@ -345,7 +345,8 @@ public class StudentPresentation {
 		return mv;
 	}
 	
-	@RequestMapping(value="/addNewStatus", method=RequestMethod.POST)
+/*<<<<<<< Upstream, based on branch 'master' of https://sumitgurav7@bitbucket.org/prachibhardwaj/online-project-management-system.git
+*/	@RequestMapping(value="/addNewStatus", method=RequestMethod.POST)
 	public ModelAndView addNewStatus(@RequestParam("projectid") String projectId, @RequestParam("newStatus") String newStatus,
 						@RequestParam("prn") String prn, @RequestParam("uname") String username)
 	{
@@ -376,5 +377,39 @@ public class StudentPresentation {
 		mv.setViewName("student/viewStatus.jsp");
 		return mv;
 	}
+
+
+
+
+/*=======
+	@RequestMapping("/addstatus")
+	public ModelAndView addStat(@RequestParam("statentry") String status, @RequestParam("username") String username)
+	{
+		ModelAndView mv = new ModelAndView();
+		
+		boolean statEntry = s.statEntryService(status,username);
+		System.out.println("boolean status" + statEntry);
+		if(statEntry == true)
+		{
+			mv.addObject("entryStat", "Status Updated");
+			List<Status> statusObject = s.getStatusFromService(username);
+			mv.addObject("listret", statusObject);
+			System.out.println("in true"+statusObject.get(0).getDescription());
+			mv.setViewName("student/viewStatus.jsp");
+		}
+		else
+		{
+			mv.addObject("entryStat", "Status not Updated");
+			List<Status> statusObject = s.getStatusFromService(username);
+			mv.addObject("listret", statusObject);
+			System.out.println(statusObject.get(0).getDescription());
+			mv.setViewName("student/viewStatus.jsp");
+		}
+				
+				
+		return mv;
+	}
+	
+>>>>>>> 659ff5c ff*/
 	
 }

@@ -1,6 +1,7 @@
 package opms.project.status;
 
 public class Status {
+
 	String projectId;
 	String timestamp;
 	String status;
@@ -41,4 +42,5 @@ public class Status {
 	public void setUpdatedBy(String updatedBy) {
 		this.updatedBy = updatedBy;
 	}
+
 }
