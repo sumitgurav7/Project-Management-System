@@ -29,7 +29,7 @@
   overflow-x: hidden;
   padding-top: 0px;
   position: absolute;
-  top: 250px;
+  top: 350px;
   left: 43%;
   float=right;
   transform: translate(-30%, -50%);
@@ -75,7 +75,7 @@
       <input type = "submit" value = "Upload" id = "submit" />
       </div>
 </form>
-	<h3>${uploadstatus}</h3>
+	<h3>${projectUploadStat}</h3>
 <h3>Download files here</h3>
 <div>
 <table style="width:100%" border ="1">
@@ -83,20 +83,26 @@
   <tr>
     <th>Project Id</th>
     <th>File Name</th>
+    <th>Uploaded By</th>
     <th>Download</th>
     
   </tr>
   
-  <c:forEach items="fileview" var="fl">
+  <c:forEach items="${fileview}" var="fl">
   <tr>
   	<td>	${fl.project_id} </td>
   	<td>	${fl.filename} </td>
+  	<td>	${fl.uploaded_by} </td>
   	<td>	${fl.filename} </td>
   
   
   </tr>
   </c:forEach>
 </table>
+
+
+
+
 </div>
 </div>
 </body>
